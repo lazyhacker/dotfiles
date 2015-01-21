@@ -144,12 +144,6 @@ if [ $(uname) = "Linux" ]; then
     alias ls='ls --color=auto'
 fi
 
-# Set things up for Go
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/workspace
-
-export PATH=$PATH:$HOME/sdks/go_appengine:$HOME/workspace/bin
-
 if [ -f $HOME/.profile ]; then
     source $HOME/.profile
 fi
