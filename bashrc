@@ -97,24 +97,16 @@ if [ $(uname) = "Linux" ]; then
     # Fill with minuses (from: https://github.com/emilis/emilis-config/blob/master/.bash_ps1)
     # (this is recalculated every time the prompt is shown in function prompt_command):
     fill="--- "
-
     reset_style='\[\033[00m\]'
-    if [ -z "$VIM" ];
-    then status_style=$reset_style'\[\033[0;90m\]' # gray color; use 0;37m for lighter color
-    else status_style=$reset_style'\[\033[0;90;107m\]'
-    fi
+    #status_style=$reset_style'\[\033[0;90m\]' # gray color; use 0;37m for lighter color
+    status_style=$reset_style'\[\033[0;29m\]' # gray color; use 0;37m for lighter color
     prompt_style=$reset_style
     command_style=$reset_style'\[\033[1;29m\]' # bold black
     # Prompt variable:
-
-    OLD_PS1="$PS1"
-    PS1="$status_style"'$fill \t\n'"$prompt_style$OLD_PS1$command_style"
-
+    PS1="$status_style"'$fill \t\n'"$prompt_style"'${debian_chroot:+($debian_chroot)}\u@\h:\w\$'"$command_style "
     # Reset color for command output
     # (this one is invoked every time before a command is executed):
     trap 'echo -ne "\e[0m"' DEBUG
-
-
     function prompt_command {
 
         # create a $fill of all screen width minus the time string and a space:
@@ -133,9 +125,8 @@ if [ $(uname) = "Linux" ]; then
             echo -ne "\033]0;${bname}: ${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
             ;;
         *)
-            ;;
+        ;;
         esac
-    
     }
     PROMPT_COMMAND=prompt_command
     # #### End Seperator ####
