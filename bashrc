@@ -1,10 +1,13 @@
-# This file is sourced on OSX from .bash_profile.
 alias bd='popd >> /dev/null'
 
 export HISTCONTROL=ignoredups:erasedups
 export HISTIGNORE="&:[]*:exit:ls"
 export EDITOR=vim
 
+# If not running interactively then don't do anything further.
+[[ $- == *i* ]] || return
+
+# These are executed only for interactive shells
 if [ -f $HOME/sdks/google-cloud-sdk/path.bash.inc ]; then
     # The next line updates PATH for the Google Cloud SDK.
     source $HOME/sdks/google-cloud-sdk/path.bash.inc
@@ -64,8 +67,7 @@ if [ $(uname) = 'Darwin' ]; then
     PS1="$status_style"'$fill \t\n'"$prompt_style"'${debian_chroot:+($debian_chroot)}\u@\h:\w\$'"$command_style "
 
     # Reset color for command output
-    # (this one is invoked every time before a command is executed):
-    trap 'echo -ne "\033[00m"' DEBUG
+    # (this one is invoked every time before a command is executed): trap 'echo -ne "\033[00m"' DEBUG
 
     function prompt_command {
 
@@ -135,6 +137,3 @@ if [ $(uname) = "Linux" ]; then
     alias ls='ls --color=auto'
 fi
 
-if [ -f $HOME/.profile ]; then
-    source $HOME/.profile
-fi
