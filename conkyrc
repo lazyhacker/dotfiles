@@ -9,7 +9,7 @@ imlib_cache_size 10
 alignment top_right
 gap_x 800
 gap_y 10
-minimum_size 300 126
+minimum_size 500 800 
 maximum_width 300
 own_window yes
 own_window_type normal  # other options are: override/dock/desktop/panel
@@ -46,8 +46,10 @@ TEXT
 \
 #-------CLOCK-------#
 \
-${font Roboto :size=64}${alignc}${time %H:%M}${font}
+${font Roboto :size=64}${alignc}${time %I:%M}${font}
 \
-#------CALENDAR------#
+#------DATE------#
 \
-${font Roboto Light :size=14}${voffset 4}${alignc}${time %A %d %B}
+${font Roboto Light :size=14}${voffset 4}${alignc}${time %A %d %B}${font}
+\
+${font Terminus :size=12}${alignc}${execpi 60 DJS=`date +%_d`; cal | sed s/"\(^\|[^0-9]\)$DJS"'\b'/'\1${color red}'"$DJS"'$color'/ | sed ':a;N;$!ba;s/\n/\n${alignc}/g'}${font}
