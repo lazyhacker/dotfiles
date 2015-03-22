@@ -7,6 +7,15 @@ export EDITOR=vim
 # If not running interactively then don't do anything further.
 [[ $- == *i* ]] || return
 
+[ -z "$PS1" ] && return
+
+# check the window size after each command and if necessary
+# update the values of LINES and COLUMNS
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+
 # These are executed only for interactive shells
 if [ -f $HOME/sdks/google-cloud-sdk/path.bash.inc ]; then
     # The next line updates PATH for the Google Cloud SDK.
