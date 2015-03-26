@@ -7,6 +7,7 @@ export EDITOR=vim
 # If not running interactively then don't do anything further.
 [[ $- == *i* ]] || return
 
+# If not running interactively then don't do anything further.
 [ -z "$PS1" ] && return
 
 # check the window size after each command and if necessary
@@ -16,15 +17,14 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-# These are executed only for interactive shells
-if [ -f $HOME/sdks/google-cloud-sdk/path.bash.inc ]; then
+if [ -f $HOME/google-cloud-sdk/path.bash.inc ]; then
     # The next line updates PATH for the Google Cloud SDK.
-    source $HOME/sdks/google-cloud-sdk/path.bash.inc
+    source $HOME/google-cloud-sdk/path.bash.inc
 fi
 
-if [ -f $HOME/sdks/google-cloud-sdk/completion.bash.inc ]; then
+if [ -f $HOME/google-cloud-sdk/completion.bash.inc ]; then
     # The next line enables bash completion for gcloud.
-    source $HOME/sdks/google-cloud-sdk/completion.bash.inc
+    source $HOME/google-cloud-sdk/completion.bash.inc
 fi
 
 if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
@@ -144,5 +144,11 @@ if [ $(uname) = "Linux" ]; then
 
     export LS_COLORS="no=00:fi=00:di=36:ln=01;36:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:*.sh=01;32:*.csh=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.xbm=01;35:*.xpm=01;35:*.png=01;35:*.tif=01;35:"
     alias ls='ls --color=auto'
+fi
+
+alias goapp=$HOME/google-cloud-sdk/platform/google_appengine/goapp
+
+if [ -x $HOME/.local_bashrc ]; then
+    source $HOME/.local_bashrc
 fi
 
