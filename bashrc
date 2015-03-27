@@ -148,7 +148,7 @@ fi
 
 alias goapp=$HOME/google-cloud-sdk/platform/google_appengine/goapp
 
-if [ -x $HOME/.local_bashrc ]; then
+if [ -f $HOME/.local_bashrc ]; then
     source $HOME/.local_bashrc
 fi
 
