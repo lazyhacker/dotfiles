@@ -178,6 +178,7 @@ noremap % v%
 
 " Key mappings in INSERT mode
 imap ;; <Esc>
+imap jj <Esc>
 imap <C-h> <Left>
 imap <C-j> <Down>
 imap <C-k> <Up>
