@@ -229,8 +229,8 @@ endif
 set background=dark
 colorscheme solarized
 let &colorcolumn="80"
-hi Folded cterm=none ctermfg=Gray
-hi NonText cterm=none ctermbg=Black ctermfg=LightGrey
+"hi Folded cterm=none ctermfg=Gray
+"hi NonText cterm=none ctermbg=Black ctermfg=LightGrey
 
 " *********** Plugin Settings *********** 
 " SuperTab
