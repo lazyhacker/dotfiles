@@ -18,10 +18,11 @@ Plugin 'fatih/vim-go'
 Plugin 'SirVer/ultisnips'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'ervandew/supertab'
+Plugin 'othree/html5.vim'
+Plugin 'qpkorr/vim-bufkill'
 " Plugins from vim-scripts.org (git mirror of vim.org).
-Plugin 'taglist.vim'
-Plugin 'bufkill.vim'
-Plugin 'Command-T'
+"Plugin 'taglist.vim'
+"Plugin 'Command-T'
 "Bundles from non github repos.
 " None
 
