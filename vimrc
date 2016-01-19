@@ -279,6 +279,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_trailing_whitespace_error = 1
 let g:go_fmt_command = "goimports"
+let g:go_highlight_interfaces = 1
 
 " Commands to run Go tools from VIM
 if has('autocmd')
