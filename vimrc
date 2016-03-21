@@ -8,18 +8,19 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Bundles from github.
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'bling/vim-airline'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'mattn/emmet-vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'fatih/vim-go'
 Plugin 'SirVer/ultisnips'
-Plugin 'jlanzarotta/bufexplorer'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/supertab'
+Plugin 'fatih/vim-go'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'majutsushi/tagbar'
+Plugin 'mattn/emmet-vim'
 Plugin 'othree/html5.vim'
 Plugin 'qpkorr/vim-bufkill'
+Plugin 'scrooloose/nerdtree'
 " Plugins from vim-scripts.org (git mirror of vim.org).
 "Plugin 'taglist.vim'
 "Plugin 'Command-T'
@@ -287,6 +288,7 @@ if has('autocmd')
     au FileType go nmap <leader>b <Plug>(go-build)
     au FileType go nmap <leader>t <Plug>(go-test)
     au FileType go nmap <leader>c <Plug>(go-coverage)
+    au FileType go nmap <Leader>d <Plug>(go-def) 
     au FileType go nmap <Leader>ds <Plug>(go-def-split) 
     au FileType go nmap <Leader>i <Plug>(go-info)
     au FileType go nmap <Leader>doc <Plug>(go-doc)
