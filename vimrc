@@ -288,7 +288,8 @@ if has('autocmd')
     au FileType go nmap <leader>b <Plug>(go-build)
     au FileType go nmap <leader>t <Plug>(go-test)
     au FileType go nmap <leader>c <Plug>(go-coverage)
-    au FileType go nmap <Leader>d <Plug>(go-def) 
+    " <leader>gd runs go-def by default
+    au FileType go nmap <Leader>d :GoDecls<CR>
     au FileType go nmap <Leader>ds <Plug>(go-def-split) 
     au FileType go nmap <Leader>i <Plug>(go-info)
     au FileType go nmap <Leader>doc <Plug>(go-doc)
