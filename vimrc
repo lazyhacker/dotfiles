@@ -204,6 +204,7 @@ nmap <F11> <leader>be
 
 " Toggle tag list
 nmap <F8> :TagbarToggle<cr>
+nmap <F9> :TagbarOpen fj<cr>
 nmap <F12> :TagbarToggle<cr>
 
 " Close OmniComplete preview window after insert.
