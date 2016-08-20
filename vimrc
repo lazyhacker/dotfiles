@@ -286,14 +286,14 @@ let g:go_highlight_interfaces = 1
 
 " Commands to run Go tools from VIM
 if has('autocmd')
-    au FileType go nmap <leader>r <Plug>(go-run)
-    au FileType go nmap <leader>b <Plug>(go-build)
-    au FileType go nmap <leader>t <Plug>(go-test)
-    au FileType go nmap <leader>c <Plug>(go-coverage)
+    au FileType go nmap <leader>gr <Plug>(go-run)
+    au FileType go nmap <leader>gb <Plug>(go-build)
+    au FileType go nmap <leader>gt <Plug>(go-test)
+    au FileType go nmap <leader>gc <Plug>(go-coverage)
     " <leader>gd runs go-def by default
-    au FileType go nmap <Leader>d :GoDecls<CR>
+    au FileType go nmap <Leader>gd :GoDecls<CR>
     au FileType go nmap <Leader>ds <Plug>(go-def-split) 
-    au FileType go nmap <Leader>i <Plug>(go-info)
+    au FileType go nmap <Leader>gi <Plug>(go-info)
     au FileType go nmap <Leader>doc <Plug>(go-doc)
     au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 endif
