@@ -12,7 +12,8 @@ Plugin 'SirVer/ultisnips'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'Shougo/neocomplete'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/supertab'
 Plugin 'fatih/vim-go'
@@ -111,7 +112,7 @@ set ignorecase
 "
 " '20  - remember marks for 20 previous files
 " \"50 - save 50 lines for each register
-" :20  - remember 20 items in command-line history 
+" :20  - remember 20 items in command-line history
 " %    - remember the buffer list (if vim started without a file arg)
 " n    - set name of viminfo file
 set viminfo='20,\"50,:20,%,n~/.viminfo
@@ -126,9 +127,9 @@ set wildmenu
 set wildmode=list:longest,full
 
 " Enable folding but do not fold code by default
-set foldenable 
+set foldenable
 set foldmethod=indent
-set foldlevel=100 
+set foldlevel=100
 
 set novisualbell "don't beep
 set noerrorbells "don't beep
@@ -210,7 +211,7 @@ nmap <F12> :TagbarToggle<cr>
 
 " Close OmniComplete preview window after insert.
 if has('autocmd')
-    autocmd CursorMovedI * if pumvisible() == 0|pclose|endif 
+    autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
     autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 endif
 
@@ -236,15 +237,17 @@ let &colorcolumn="80"
 "hi Folded cterm=none ctermfg=Gray
 "hi NonText cterm=none ctermbg=Black ctermfg=LightGrey
 
-" *********** Plugin Settings *********** 
+" *********** Plugin Settings ***********
 " SuperTab
 let g:SuperTabDefaultCompletionType = "context"
 
 " Airline Plugin configuration
-"let g:airline_theme='solarized'
+let g:airline_theme='solarized'
 "let g:airline_enable_tagbar=1
 let g:airline#extensions#tagbar#enabled = 1
+let g:airline_symbols = get(g:,'airline_symbols',{})
 let g:airline_powerline_fonts = 1
+let g:airline_symbols.maxlinenr=''
 " remove separators
 "let g:airline_left_sep=' '
 "let g:airline_right_sep=' '
@@ -254,7 +257,7 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:user_emmet_install_globals = 0
 autocmd FileType html,css EmmetInstall
 
-" *********** Language Specific Settings ***********  
+" *********** Language Specific Settings ***********
 
 " Strip out trailing white spaces for certain files
 autocmd BufWritePre *.py,*.js,*.html :%s/\s\+$//e
@@ -292,7 +295,7 @@ if has('autocmd')
     au FileType go nmap <leader>gc <Plug>(go-coverage)
     " <leader>gd runs go-def by default
     au FileType go nmap <Leader>gd :GoDecls<CR>
-    au FileType go nmap <Leader>ds <Plug>(go-def-split) 
+    au FileType go nmap <Leader>ds <Plug>(go-def-split)
     au FileType go nmap <Leader>gi <Plug>(go-info)
     au FileType go nmap <Leader>doc <Plug>(go-doc)
     au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
