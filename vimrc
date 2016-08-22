@@ -295,7 +295,7 @@ if has('autocmd')
     au FileType go nmap <leader>gt <Plug>(go-test)
     au FileType go nmap <leader>gc <Plug>(go-coverage)
     " <leader>gd runs go-def by default
-    au FileType go nmap <Leader>gd :GoDecls<CR>
+    au FileType go nmap <Leader>gf :GoDecls<CR>
     au FileType go nmap <Leader>ds <Plug>(go-def-split)
     au FileType go nmap <Leader>gi <Plug>(go-info)
     au FileType go nmap <Leader>doc <Plug>(go-doc)
