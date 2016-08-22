@@ -277,6 +277,7 @@ autocmd BufNewFile,BufRead *.html,*.template setlocal textwidth=300
 if has('autocmd')
     autocmd FileType go setlocal tabstop=4
     autocmd FileType go setlocal shiftwidth=4
+    au Filetype go set noshowmode
 endif
 
 " vim-go settings
