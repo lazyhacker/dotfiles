@@ -18,19 +18,19 @@ $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 In ~/.vimrc, add to the beginning:
 
-```
+```vim
 source dotfiles/vimrc 
 ```
 
 To disable certain plugins locally:
 
-```
+```vim
 set runtimepath-=~/.vim/bundle/<plugin dir>
 ```
 
 To unset any settings:
 
-```
+```vim
 unlet g:<variable>
 ```
 
