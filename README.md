@@ -4,7 +4,7 @@ Install
 -------
 
 ```
-git clone https://github.com/lazyhacker/dotfiles
+$ git clone https://github.com/lazyhacker/dotfiles
 ```
 
 VIM
@@ -13,7 +13,7 @@ VIM
 Install VUNDLE:
 
 ```
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
 In ~/.vimrc, add to the beginning:
@@ -46,26 +46,26 @@ source dotfile/bashrc
 Symlink bash_profile to .bash_profile:
 
 ```
-ln -s dotfiles/bashrc ~/.bashrc
+$ ln -s dotfiles/bashrc ~/.bashrc
 ```
 
 TMUX
 ----
 
 ```
-ln -s dotfiles/tmux.conf ~/.tmux.conf
+$ ln -s dotfiles/tmux.conf ~/.tmux.conf
 ```
 
 Conky
 -----
 
 ```
-ln -s dotfiles/conkyrc ~/.conkrc
+$ ln -s dotfiles/conkyrc ~/.conkrc
 ```
 
 Xmodmap
 -------
 
 ```
-ln -s dotfiles/Xmodmap ~/.Xmodmap
+$ ln -s dotfiles/Xmodmap ~/.Xmodmap
 ```
