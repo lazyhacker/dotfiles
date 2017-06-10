@@ -1,11 +1,71 @@
 My common dot files for OSX and Linux.
 
-Simply symlink to these (e.g. ln -s bashrc ~/.bashrc).
+Install
+-------
 
-vimrc uses VUNDLE to manage plug-ins and after installing YouCompleteMe needs to be compiled.
+```
+git clone https://github.com/lazyhacker/dotfiles
+```
+
+VIM
+---
+
+Install VUNDLE:
+
+```
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+
+In ~/.vimrc, add to the beginning:
+
+```
+source dotfiles/vimrc 
+```
 
 To disable certain plugins locally:
 
-  set runtimepath-=~/.vim/bundle/<plugin dir>
+```
+set runtimepath-=~/.vim/bundle/<plugin dir>
+```
 
-To unset any settings:  unlet g:<variable>
+To unset any settings:
+
+```
+unlet g:<variable>
+```
+
+BASH
+----
+
+Add to the start of ~/.bashrc
+
+```
+source dotfile/bashrc
+```
+
+Symlink bash_profile to .bash_profile:
+
+```
+ln -s dotfiles/bashrc ~/.bashrc
+```
+
+TMUX
+----
+
+```
+ln -s dotfiles/tmux.conf ~/.tmux.conf
+```
+
+Conky
+-----
+
+```
+ln -s dotfiles/conkyrc ~/.conkrc
+```
+
+Xmodmap
+-------
+
+```
+ln -s dotfiles/Xmodmap ~/.Xmodmap
+```

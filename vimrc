@@ -23,6 +23,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'othree/html5.vim'
 Plugin 'qpkorr/vim-bufkill'
 Plugin 'scrooloose/nerdtree'
+Plugin 'moorereason/vim-markdownfmt'
 " Plugins from vim-scripts.org (git mirror of vim.org).
 "Plugin 'taglist.vim'
 "Plugin 'Command-T'
@@ -335,4 +336,7 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
-
+" Markdown settings
+"au BufRead,BufNewFile *.md setlocal textwidth=80
+let g:markdownfmt_command = 'mdfmt'
+let g:markdownfmt_autosave=1

@@ -17,16 +17,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-if [ -f $HOME/google-cloud-sdk/path.bash.inc ]; then
-    # The next line updates PATH for the Google Cloud SDK.
-    source $HOME/google-cloud-sdk/path.bash.inc
-fi
-
-if [ -f $HOME/google-cloud-sdk/completion.bash.inc ]; then
-    # The next line enables bash completion for gcloud.
-    source $HOME/google-cloud-sdk/completion.bash.inc
-fi
-
 if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
     # Git completion
     source /usr/local/etc/bash_completion.d/git-completion.bash
@@ -146,9 +136,5 @@ if [ $(uname) = "Linux" ]; then
     alias ls='ls --color=auto'
 fi
 
-alias goapp=$HOME/google-cloud-sdk/platform/google_appengine/goapp
 
-if [ -f $HOME/.local_bashrc ]; then
-    source $HOME/.local_bashrc
-fi
 
