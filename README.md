@@ -39,13 +39,13 @@ BASH
 
 Add to the start of ~/.bashrc
 
-```
-source dotfile/bashrc
+```bash
+source dotfiles/bashrc
 ```
 
 Symlink bash_profile to .bash_profile:
 
-```
+```bash
 $ ln -s dotfiles/bashrc ~/.bashrc
 ```
 
