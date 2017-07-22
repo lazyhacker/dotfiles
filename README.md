@@ -10,18 +10,18 @@ $ git clone https://github.com/lazyhacker/dotfiles
 VIM
 ---
 
-Install VUNDLE:
 
-```
-$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
-
-In ~/.vimrc, add to the beginning:
+In `~/.vimrc` (Linux/OSX) or `~/_vimrc` (Windows), add to the beginning:
 
 ```vim
 source dotfiles/vimrc 
 ```
 
+Install VUNDLE:
+
+```
+$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
 To disable certain plugins locally:
 
 ```vim

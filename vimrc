@@ -1,6 +1,12 @@
 " Setup Vundle for handling plugins
 set nocompatible
 filetype off
+
+" On Windows, change from ~/vimfiles to ~/.vim for plugins.
+if has('win32') || has('win64')
+    set runtimepath^=~/.vim
+endif    
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -340,3 +346,12 @@ let g:tagbar_type_go = {
 "au BufRead,BufNewFile *.md setlocal textwidth=80
 let g:markdownfmt_command = 'mdfmt'
 let g:markdownfmt_autosave=1
+
+if has("gui_running")
+    set guioptions-=m  "remove menu bar
+    set guioptions-=T  "remove toolbar
+    set guioptions-=r  "remove right-hand scroll bar
+    set guioptions-=L  "remove left-hand scroll bar
+endif
+
+
