@@ -1,6 +1,12 @@
 " Setup Vundle for handling plugins
 set nocompatible
 filetype off
+
+" On Windows, change from ~/vimfiles to ~/.vim for plugins.
+if has('win32') || has('win64')
+    set runtimepath^=~/.vim
+endif    
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -358,5 +364,12 @@ let g:markdownfmt_autosave=1
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 let g:ale_sign_column_always = 1
+
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
+if has("gui_running")
+    set guioptions-=m  "remove menu bar
+    set guioptions-=T  "remove toolbar
+    set guioptions-=r  "remove right-hand scroll bar
+    set guioptions-=L  "remove left-hand scroll bar
+endif
