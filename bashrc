@@ -38,6 +38,13 @@ fi
 #    source /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 #fi
 
+if [ -f `which powerline-daemon` ]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . /usr/share/powerline/bash/powerline.sh
+fi
+
 # Set termcap for 256 color for VIM/SCREEN
 if [ ! -z "$TERMCAP" ] && [ "$TERM" == "screen" ]; then
     export TERMCAP $(echo $TERMCAP | sed -e 's/Co#8/Co#256/g')

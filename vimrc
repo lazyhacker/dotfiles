@@ -8,22 +8,24 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Bundles from github.
-Plugin 'SirVer/ultisnips'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'Shougo/neocomplete'
+Plugin 'SirVer/ultisnips'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/supertab'
 Plugin 'fatih/vim-go'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'majutsushi/tagbar'
 Plugin 'mattn/emmet-vim'
+Plugin 'moorereason/vim-markdownfmt'
 Plugin 'othree/html5.vim'
 Plugin 'qpkorr/vim-bufkill'
 Plugin 'scrooloose/nerdtree'
-Plugin 'moorereason/vim-markdownfmt'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'w0rp/ale'
+
 " Plugins from vim-scripts.org (git mirror of vim.org).
 "Plugin 'taglist.vim'
 "Plugin 'Command-T'
@@ -282,12 +284,20 @@ if has('autocmd')
 endif
 
 " vim-go settings
+let g:go_auto_type_info = 1
+let g:go_fmt_command = "goimports"
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
+let g:go_highlight_interfaces = 1
 let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_trailing_whitespace_error = 1
-let g:go_fmt_command = "goimports"
-let g:go_highlight_interfaces = 1
+let g:go_highlight_types = 1
+let g:go_auto_sameids = 1
+let g:go_auto_sameids = 0
 
 " Commands to run Go tools from VIM
 if has('autocmd')
@@ -301,6 +311,8 @@ if has('autocmd')
     au FileType go nmap <Leader>gi <Plug>(go-info)
     au FileType go nmap <Leader>doc <Plug>(go-doc)
     au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+    au FileType go nmap <leader>gp :GoDeclsDir<cr>
+    au FileType go nmap <leader>ga :GoAlternate<cr>
 endif
 
 " vim-godef settings
@@ -340,3 +352,11 @@ let g:tagbar_type_go = {
 "au BufRead,BufNewFile *.md setlocal textwidth=80
 let g:markdownfmt_command = 'mdfmt'
 let g:markdownfmt_autosave=1
+
+" Ale lint settings
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+let g:ale_sign_column_always = 1
+" Enable integration with airline.
+let g:airline#extensions#ale#enabled = 1
