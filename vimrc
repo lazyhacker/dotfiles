@@ -5,7 +5,7 @@ filetype off
 " On Windows, change from ~/vimfiles to ~/.vim for plugins.
 if has('win32') || has('win64')
     set runtimepath^=~/.vim
-endif    
+endif
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -269,7 +269,8 @@ autocmd FileType html,css EmmetInstall
 " *********** Language Specific Settings ***********
 
 " Strip out trailing white spaces for certain files
-autocmd BufWritePre *.py,*.js,*.html :%s/\s\+$//e
+autocmd FileType vim,c,cpp,java,php,textpb,markdown,html autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd BufWritePre *.py,*.md,*.pp,*.py,*.js,*.html,*.sdl,*.proto :%s/\s+$//e
 
 " Treat .template files as html files
 au BufNewFile,BufRead *.template set filetype=html
@@ -354,9 +355,10 @@ let g:tagbar_type_go = {
 \ }
 
 " Markdown settings
-"au BufRead,BufNewFile *.md setlocal textwidth=80
-let g:markdownfmt_command = 'mdfmt'
-let g:markdownfmt_autosave=1
+au BufRead,BufNewFile *.md setlocal textwidth=80
+let g:markdownfmt_command = 'markdownfmt'
+let g:markdownfmt_autosave=0
+au FileType markdown nmap <leader>md :<C-u>call markdownfmt#Format()<CR>
 
 " Ale lint settings
 " Error and warning signs.
