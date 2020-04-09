@@ -14,7 +14,7 @@ VIM
 In `~/.vimrc` (Linux/OSX) or `~/_vimrc` (Windows), add to the beginning:
 
 ```vim
-source dotfiles/vimrc 
+source dotfiles/vimrc
 ```
 
 Install VUNDLE:
@@ -36,6 +36,36 @@ unlet g:<variable>
 
 BASH
 ----
+
+## Loading Order
+The loading order of Bash startup files is first dependent on the type of
+shell that Bash think it is in.
+
+A **Login shell** is when the user logs in from tty (not through a GUI) or logs
+in remotely (e.g. through ssh).
+
+A **Non-login shell** is started in other ways such as gnome-terminal which
+is started by Gnome (it is a login shell that launched Gnome).
+
+Note: The exception is OSX's Terminal.app which is treated as a login shell.
+
+For non-login shells (e.g. gnome-terminal) the order is:
+
+```
+   /etc/bash.bashrc
+   ~/.bashrc
+```
+
+For login-shells (including Terminal.app) the order is:
+  `/etc/profile` and then first of:
+
+```
+     ~/.bash_profile
+     ~/.bash_login
+     ~/.profile
+```
+
+## Install
 
 Add to the start of ~/.bashrc
 
