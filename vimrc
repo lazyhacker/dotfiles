@@ -235,8 +235,6 @@ if match($TERMCAP, 'Co#256:') == 0 || match($TERMCAP, ':Co#256:') > 0
     set t_co=256
 endif
 
-set background=dark
-colorscheme solarized
 let &colorcolumn="80"
 "hi Folded cterm=none ctermfg=Gray
 "hi NonText cterm=none ctermbg=Black ctermfg=LightGrey
@@ -289,6 +287,8 @@ if !has('gui_running')
         let g:solarized_termcolors=16
     endif
 endif
+set background=dark
+colorscheme solarized
 
 " --- SuperTab ---
 let g:SuperTabDefaultCompletionType = "context"
