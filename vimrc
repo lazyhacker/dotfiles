@@ -33,7 +33,7 @@ Plugin 'qpkorr/vim-bufkill'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-
+Plugin 'lifepillar/vim-solarized8'
 " Plugins from vim-scripts.org (git mirror of vim.org).
 "Plugin 'taglist.vim'
 "Plugin 'Command-T'
@@ -271,6 +271,12 @@ if has('autocmd')
     au Filetype go set noshowmode
 endif
 
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set background=dark
+"set t_Co=256
+
 " *********** Plugin Settings ***********
 
 " --- netRW: Open files in a split window ---
@@ -287,8 +293,10 @@ if !has('gui_running')
         let g:solarized_termcolors=16
     endif
 endif
-set background=dark
-colorscheme solarized
+"colorscheme solarized
+
+" --- Solarized8 ---
+colorscheme solarized8_high
 
 " --- SuperTab ---
 let g:SuperTabDefaultCompletionType = "context"
