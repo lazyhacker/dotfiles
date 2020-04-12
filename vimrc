@@ -66,7 +66,7 @@ set splitbelow
 set hidden
 
 " Insert mode completion options
-set completeopt=longest,menuone
+set completeopt=longest,menu,menuone
 "set completeopt=menu,menuone
 
 " Use UTF-8 as the default buffer encoding
@@ -142,9 +142,20 @@ set wildmenu
 set wildmode=list:longest,full
 
 " Enable folding but do not fold code by default
-set foldenable
+"   zc close
+"   zo open
+"   za toggle current
+"   z[C,O,A] all folds
+"   zR open all folds
+set nofoldenable
 set foldmethod=indent
-set foldlevel=100
+set foldlevel=2
+"" speed up syntax highlighting
+" set nocursorcolumn
+" set nocursorline
+" syntax sync minlines=256
+" set synmaxcol=300
+" set re=1
 
 set novisualbell "don't beep
 set noerrorbells "don't beep
@@ -296,7 +307,7 @@ endif
 "colorscheme solarized
 
 " --- Solarized8 ---
-colorscheme solarized8_high
+colorscheme solarized8
 
 " --- SuperTab ---
 let g:SuperTabDefaultCompletionType = "context"
@@ -329,17 +340,32 @@ let g:neocomplete#enable_auto_close_preview = 0
 " --- vim-go settings ---
 let g:go_auto_type_info = 1
 let g:go_fmt_command = "goimports"
+let g:go_debug_breakpoint_sign_text = 0
+let g:go_auto_sameids = 0
+let g:go_highlight_array_whitespace_error = 0
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_chan_whitespace_error = 0
+let g:go_highlight_debug = 0
+let g:go_highlight_diagnostic_errors = 0
+let g:go_highlight_diagnostic_warnings = 0
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_function_arguments = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_function_parameters = 1
 let g:go_highlight_functions = 1
+let g:go_highlight_generate_tags = 0
 let g:go_highlight_interfaces = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_string_spellcheck = 0
+let g:go_highlight_structs = 0
 let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types = 1
-let g:go_auto_sameids = 0
+let g:go_highlight_variable_assignments = 0
+let g:go_highlight_variable_declarations = 1
 
 " dif - 'd'eletes the function body (between the {}). yif - 'y'anks the body
 " content.
@@ -383,7 +409,7 @@ if has('autocmd')
     " Bring up the browser window with the right godoc.org page
     au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
     " :GoDecls shows all types and function declaration to do quick fuzzy
-    " search of current file
+    "          search of current file
     " Like :GoDecls but searches the directory
     au FileType go nmap <leader>gp :GoDeclsDir<cr>
     " Toggle between foo.go and foo_test.go
@@ -392,7 +418,8 @@ if has('autocmd')
     au FileType go map <F3> %:GoInfo<CR><C-o>
     " Jump out of insert mode to run GoInfo to show signature in the status
     au FileType go inoremap <F3> <C-o>%<C-o>:GoInfo<CR><C-o><C-o>
-
+    au FileType go set foldmethod=syntax
+    au FileType go set foldlevel=0
 endif
 
 " vim-godef settings
