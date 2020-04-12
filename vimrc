@@ -15,6 +15,9 @@ Plugin 'gmarik/Vundle.vim'
 
 " Bundles from github.
 "Plugin 'Valloric/YouCompleteMe'
+"Plugin 'w0rp/ale'
+Plugin 'Raimondi/delimitMate'
+Plugin 'Shougo/echodoc'
 Plugin 'Shougo/neocomplete'
 Plugin 'SirVer/ultisnips'
 Plugin 'altercation/vim-colors-solarized'
@@ -30,7 +33,6 @@ Plugin 'qpkorr/vim-bufkill'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-"Plugin 'w0rp/ale'
 
 " Plugins from vim-scripts.org (git mirror of vim.org).
 "Plugin 'taglist.vim'
@@ -61,7 +63,8 @@ set backspace=indent,eol,start
 set splitbelow
 
 " Insert mode completion options
-set completeopt=menu,longest,preview
+set completeopt=longest,menuone
+"set completeopt=menu,menuone
 
 " Use UTF-8 as the default buffer encoding
 set enc=utf-8
@@ -160,11 +163,10 @@ endif
 set t_kb=
 fixdel
 
-" Avoid loading MatchParen plugin
-let loaded_matchparen = 1
+" Disable highlighting matching parenthesis
+"let loaded_matchparen = 1
 
-" netRW: Open files in a split window
-let g:netrw_browse_split = 1
+set shortmess+=c   " Shut off completion messages
 
 " Use <space> as the leader - need the noop before let mapleader
 nnoremap <SPACE> <Nop>
@@ -187,7 +189,7 @@ nnoremap <Leader>w :w<CR>
 map q: :q
 
 " Jump to the matching braces/parans and highlight everything in between
-noremap % v%
+"noremap % v%
 
 " Key mappings in INSERT mode
 imap ;; <Esc>
@@ -219,25 +221,14 @@ nmap <F9> :TagbarOpen fj<cr>
 nmap <F12> :TagbarToggle<cr>
 
 " Close OmniComplete preview window after insert.
-if has('autocmd')
-    autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-    autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-endif
+"if has('autocmd')
+"    autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+"    autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"endif
 
 " Make VIM work in Screen
 if match($TERMCAP, 'Co#256:') == 0 || match($TERMCAP, ':Co#256:') > 0
     set t_co=256
-endif
-
-if !has('gui_running')
-    "Compatibility for Terminal"
-    let g:solarized_termtrans=1
-    if (&t_Co >= 256 || $TERM == 'xterm-256color')
-        let g:solarized_termcolors=256
-    else
-        " Make Solarized use 16 colors for Terminal support
-        let g:solarized_termcolors=16
-    endif
 endif
 
 set background=dark
@@ -246,25 +237,12 @@ let &colorcolumn="80"
 "hi Folded cterm=none ctermfg=Gray
 "hi NonText cterm=none ctermbg=Black ctermfg=LightGrey
 
-" *********** Plugin Settings ***********
-" SuperTab
-let g:SuperTabDefaultCompletionType = "context"
+" Automatically resize screens to be equally the same
+autocmd VimResized * wincmd =
 
-" Airline Plugin configuration
-let g:airline_theme='solarized'
-"let g:airline_enable_tagbar=1
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline_symbols = get(g:,'airline_symbols',{})
-let g:airline_powerline_fonts = 1
-let g:airline_symbols.maxlinenr=''
-" remove separators
-"let g:airline_left_sep=' '
-"let g:airline_right_sep=' '
-"let g:airline_detect_whitespace=0
-let g:airline#extensions#whitespace#enabled = 1
-" Limit Emmet Plugin to just HTLM and CSS files.
-let g:user_emmet_install_globals = 0
-autocmd FileType html,css EmmetInstall
+" This maps the ENTER key to be like ctrl-y when selecting from the menu.
+" ctrl-x ctrl-o will bring up the autocomplete menu again.
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " *********** Language Specific Settings ***********
 
@@ -284,13 +262,59 @@ autocmd BufNewFile,BufRead *.html,*.template setlocal textwidth=300
 "filetype plugin indent on
 "syntax on
 "au FileType go au BufWritePre <buffer> Fmt
+
 if has('autocmd')
     autocmd FileType go setlocal tabstop=4
     autocmd FileType go setlocal shiftwidth=4
     au Filetype go set noshowmode
 endif
 
-" vim-go settings
+" *********** Plugin Settings ***********
+
+" --- netRW: Open files in a split window ---
+let g:netrw_browse_split = 1
+
+" Solarized Theme ---
+if !has('gui_running')
+    "Compatibility for Terminal"
+    let g:solarized_termtrans=1
+    if (&t_Co >= 256 || $TERM == 'xterm-256color')
+        let g:solarized_termcolors=256
+    else
+        " Make Solarized use 16 colors for Terminal support
+        let g:solarized_termcolors=16
+    endif
+endif
+
+" --- SuperTab ---
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" --- Airline ---
+let g:airline_theme='solarized'
+"let g:airline_enable_tagbar=1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline_symbols = get(g:,'airline_symbols',{})
+let g:airline_powerline_fonts = 1
+let g:airline_symbols.maxlinenr=''
+" remove separators
+"let g:airline_left_sep=' '
+"let g:airline_right_sep=' '
+"let g:airline_detect_whitespace=0
+let g:airline#extensions#whitespace#enabled = 1
+
+" Limit Emmet Plugin to just HTLM and CSS files.
+let g:user_emmet_install_globals = 0
+autocmd FileType html,css EmmetInstall
+
+" --- NeoComplete ---
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_auto_close_preview = 0
+
+" --- vim-go settings ---
 let g:go_auto_type_info = 1
 let g:go_fmt_command = "goimports"
 let g:go_highlight_build_constraints = 1
@@ -305,27 +329,65 @@ let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types = 1
 let g:go_auto_sameids = 0
 
+" dif - 'd'eletes the function body (between the {}). yif - 'y'anks the body
+" content.
+" daf - 'd'eletes the whole function.
+" ]] jumps to next function (also accepts counts such as 5]] or v]])
+" [[ jumps to previous function (also accepts counts such as 5[[ or v[[)
+" ctrl-x ctrl-o auto-completes
+"
+" :GoSameIds highlights all the matching identifiers (e.g. vars, func)
+" :GoSameIdsClear clear highlights
+
+" :GoFiles lists all the files for the package
+" :GoDeps shows the dependency of the file
+
+" ***Guru commands***
+" :GoDescribe       Like :GoInfo but more detailed.
+" :GoImplements     Gives what interface it implements.
+" :GoWhicherrs      Shows possible err value.
+" :GoChannelPeers   Shows the allocation of a channel and where it's
+"                   sending/receiving from.
+" :GoCallee         Lists all the functions called.
+" :GoCaller         Lists all the caller of the function.
+" :GoCallStack      shows arbitray path from root to function.
+
+
 " Commands to run Go tools from VIM
 if has('autocmd')
     au FileType go nmap <leader>gr <Plug>(go-run)
     au FileType go nmap <leader>gb <Plug>(go-build)
     au FileType go nmap <leader>gt <Plug>(go-test)
     au FileType go nmap <leader>gc <Plug>(go-coverage)
-    " <leader>gd runs go-def by default
+    " <leader>gd or ctrl-] jumps to definition by default.
+    " ctrl-t jumps back to the previous location (instead of ctrl-o)
     au FileType go nmap <Leader>gf :GoDecls<CR>
+    " Jump to the function definition in a new vertical split window
     au FileType go nmap <Leader>ds <Plug>(go-def-split)
+    " Show the function signature in the status line
     au FileType go nmap <Leader>gi <Plug>(go-info)
+    " Show the full documentation for function
     au FileType go nmap <Leader>doc <Plug>(go-doc)
+    " Bring up the browser window with the right godoc.org page
     au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+    " :GoDecls shows all types and function declaration to do quick fuzzy
+    " search of current file
+    " Like :GoDecls but searches the directory
     au FileType go nmap <leader>gp :GoDeclsDir<cr>
+    " Toggle between foo.go and foo_test.go
     au FileType go nmap <leader>ga :GoAlternate<cr>
+    " Show function signature in the status
+    au FileType go map <F3> %:GoInfo<CR><C-o>
+    " Jump out of insert mode to run GoInfo to show signature in the status
+    au FileType go inoremap <F3> <C-o>%<C-o>:GoInfo<CR><C-o><C-o>
+
 endif
 
 " vim-godef settings
 "let g:godef_split=2
 "let g:godef_same_file_in_same_window=1
 
-" tagbar settings
+" --- Tagbar settings ---
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -354,23 +416,27 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
-" Markdown settings
+" --- Markdown settings ---
 au BufRead,BufNewFile *.md setlocal textwidth=80
 let g:markdownfmt_command = 'markdownfmt'
 let g:markdownfmt_autosave=0
 au FileType markdown nmap <leader>md :<C-u>call markdownfmt#Format()<CR>
 
-" Ale lint settings
+" --- Ale ---
 " Error and warning signs.
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1  "Enable integration with airline.
 
-" Enable integration with airline.
-let g:airline#extensions#ale#enabled = 1
 if has("gui_running")
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
     set guioptions-=L  "remove left-hand scroll bar
 endif
+
+" --- Echodoc ---
+" To use echodoc, you must increase 'cmdheight' value.
+"set cmdheight=2
+"let g:echodoc_enable_at_startup = 1
