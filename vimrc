@@ -62,6 +62,9 @@ set backspace=indent,eol,start
 " Set the split window to be the bottom (useful for preview)
 set splitbelow
 
+" Allow unwritten buffer
+set hidden
+
 " Insert mode completion options
 set completeopt=longest,menuone
 "set completeopt=menu,menuone
@@ -166,7 +169,8 @@ fixdel
 " Disable highlighting matching parenthesis
 "let loaded_matchparen = 1
 
-set shortmess+=c   " Shut off completion messages
+" Shut off completion messages
+"set shortmess+=c
 
 " Use <space> as the leader - need the noop before let mapleader
 nnoremap <SPACE> <Nop>
