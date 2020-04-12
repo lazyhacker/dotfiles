@@ -201,7 +201,9 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 nnoremap <Leader>w :w<CR>
 
 " Stop the stupid record window that I never use
-map q: :q
+nnoremap Q q     " capital Q to start/stop recording
+nnoremap q <Nop> " turns off the q key
+"map q: :q
 
 " Jump to the matching braces/parans and highlight everything in between
 "noremap % v%
@@ -342,6 +344,7 @@ let g:go_auto_type_info = 1
 let g:go_fmt_command = "goimports"
 let g:go_debug_breakpoint_sign_text = 0
 let g:go_auto_sameids = 0
+let g:go_template_autocreate = 0  " turn off inserting skeleton template with new files.
 let g:go_highlight_array_whitespace_error = 0
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_chan_whitespace_error = 0
@@ -397,27 +400,38 @@ if has('autocmd')
     au FileType go nmap <leader>gb <Plug>(go-build)
     au FileType go nmap <leader>gt <Plug>(go-test)
     au FileType go nmap <leader>gc <Plug>(go-coverage)
-    " <leader>gd or ctrl-] jumps to definition by default.
-    " ctrl-t jumps back to the previous location (instead of ctrl-o)
-    au FileType go nmap <Leader>gf :GoDecls<CR>
+
+    " <leader>gd or ctrl-] jumps to definition by default then use ctrl-t
+    " jumps back to the previous location (instead of ctrl-o)
+
     " Jump to the function definition in a new vertical split window
     au FileType go nmap <Leader>ds <Plug>(go-def-split)
+
     " Show the function signature in the status line
     au FileType go nmap <Leader>gi <Plug>(go-info)
-    " Show the full documentation for function
-    au FileType go nmap <Leader>doc <Plug>(go-doc)
-    " Bring up the browser window with the right godoc.org page
-    au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-    " :GoDecls shows all types and function declaration to do quick fuzzy
-    "          search of current file
-    " Like :GoDecls but searches the directory
-    au FileType go nmap <leader>gp :GoDeclsDir<cr>
-    " Toggle between foo.go and foo_test.go
-    au FileType go nmap <leader>ga :GoAlternate<cr>
     " Show function signature in the status
     au FileType go map <F3> %:GoInfo<CR><C-o>
+
+    " Show the full documentation for function
+    au FileType go nmap <Leader>gf <Plug>(go-doc)
+
+    " Bring up the browser window with the right godoc.org page
+    au FileType go nmap <Leader>godoc <Plug>(go-doc-browser)
+
+    " Shows all types and function declaration to do quick fuzzy search of
+    " current file
+    au FileType go nmap <Leader>gz :GoDecls<CR>
+
+    " Like :GoDecls but searches the directory
+    au FileType go nmap <leader>gp :GoDeclsDir<cr>
+
+    " Toggle between foo.go and foo_test.go
+    au FileType go nmap <leader>ga :GoAlternate<cr>
+
     " Jump out of insert mode to run GoInfo to show signature in the status
     au FileType go inoremap <F3> <C-o>%<C-o>:GoInfo<CR><C-o><C-o>
+
+    " Code folding settings for Go
     au FileType go set foldmethod=syntax
     au FileType go set foldlevel=0
 endif
