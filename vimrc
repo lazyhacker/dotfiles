@@ -18,8 +18,11 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'w0rp/ale'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Shougo/echodoc'
-Plugin 'Shougo/neocomplete'
+"Plugin 'Shougo/deoplete.nvim'
+"Plugin 'Shougo/neocomplete'
 "Plugin 'SirVer/ultisnips'
+"Plugin 'roxma/nvim-yarp'
+"Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/supertab'
@@ -335,9 +338,14 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:user_emmet_install_globals = 0
 autocmd FileType html,css EmmetInstall
 
-" --- NeoComplete ---
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_auto_close_preview = 0
+"" --- NeoComplete ---
+"let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#enable_auto_close_preview = 0
+
+"" --- deocomplete ---
+""let g:deoplete#enable_at_startup = 1
+""instruct deoplete to use omni completion for go files
+""call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 " --- vim-go settings ---
 let g:go_auto_type_info = 1
