@@ -13,3 +13,4 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
 
+ln -s $HOME/dotfiles/dir_colors $HOME/.dircolors
