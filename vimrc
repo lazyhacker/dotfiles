@@ -225,8 +225,8 @@ imap <C-c> <C-o>vgG
 " Nerd tree toggle
 nmap <F2> :NERDTreeToggle<CR>
 
-" Use <F3> to delete trailing white space
-:nnoremap <silent> <F3> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+" Use <F6> to delete trailing white space
+:nnoremap <silent> <F6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 " Use <F4> to toggle paste mode
 set pastetoggle=<F4>
@@ -425,6 +425,8 @@ if has('autocmd')
     au FileType go nmap <Leader>gi <Plug>(go-info)
     " Show function signature in the status
     au FileType go map <F3> %:GoInfo<CR><C-o>
+    " Jump out of insert mode to run GoInfo to show signature in the status
+    au FileType go inoremap <F3> <C-o>%<C-o>:GoInfo<CR><C-o><C-o>
 
     " Show the full documentation for function
     au FileType go nmap <Leader>gf <Plug>(go-doc)
@@ -441,9 +443,6 @@ if has('autocmd')
 
     " Toggle between foo.go and foo_test.go
     au FileType go nmap <leader>ga :GoAlternate<cr>
-
-    " Jump out of insert mode to run GoInfo to show signature in the status
-    au FileType go inoremap <F3> <C-o>%<C-o>:GoInfo<CR><C-o><C-o>
 
     " Code folding settings for Go
     au FileType go set foldmethod=syntax
