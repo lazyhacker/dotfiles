@@ -222,11 +222,17 @@ imap <C-v> <C-o><S-p>
 imap <C-u> <C-o>u
 imap <C-c> <C-o>vgG
 
-" use <F6> to toggle line numbers
-nmap <silent> <F6> :set number!<CR>
-
 " Nerd tree toggle
 nmap <F2> :NERDTreeToggle<CR>
+
+" Use <F3> to delete trailing white space
+:nnoremap <silent> <F3> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
+" Use <F4> to toggle paste mode
+set pastetoggle=<F4>
+
+" use <F5> to toggle line numbers
+nmap <silent> <F5> :set number!<CR>
 
 " Build tags for current directory
 "nmap <F9> :!/usr/bin/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
