@@ -1,4 +1,5 @@
 alias bd='popd >> /dev/null'
+alias cd='cd -P'
 
 export HISTCONTROL=ignoredups:erasedups
 export HISTIGNORE="&:[]*:exit:ls"
