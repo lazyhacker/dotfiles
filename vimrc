@@ -268,31 +268,6 @@ autocmd VimResized * wincmd =
 " ctrl-x ctrl-o will bring up the autocomplete menu again.
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" *********** Language Specific Settings ***********
-
-" Strip out trailing white spaces for certain files
-autocmd FileType vim,c,cpp,java,php,textpb,markdown,html autocmd BufWritePre <buffer> :%s/\s\+$//e
-autocmd BufWritePre *.py,*.md,*.pp,*.py,*.js,*.html,*.sdl,*.proto :%s/\s+$//e
-
-" Treat .template files as html files
-au BufNewFile,BufRead *.template set filetype=html
-" html and template files doesn't need the 80 column limit
-autocmd BufNewFile,BufRead *.html,*.template setlocal textwidth=300
-
-" Golang Specific Stuff
-"filetype off
-"filetype plugin indent off
-"set runtimepath+=$GOROOT/misc/vim
-"filetype plugin indent on
-"syntax on
-"au FileType go au BufWritePre <buffer> Fmt
-
-if has('autocmd')
-    autocmd FileType go setlocal tabstop=4
-    autocmd FileType go setlocal shiftwidth=4
-    au Filetype go set noshowmode
-endif
-
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -384,71 +359,6 @@ let g:go_highlight_types = 1
 let g:go_highlight_variable_assignments = 0
 let g:go_highlight_variable_declarations = 1
 
-" dif - 'd'eletes the function body (between the {}). yif - 'y'anks the body
-" content.
-" daf - 'd'eletes the whole function.
-" ]] jumps to next function (also accepts counts such as 5]] or v]])
-" [[ jumps to previous function (also accepts counts such as 5[[ or v[[)
-" ctrl-x ctrl-o auto-completes
-"
-" :GoSameIds highlights all the matching identifiers (e.g. vars, func)
-" :GoSameIdsClear clear highlights
-
-" :GoFiles lists all the files for the package
-" :GoDeps shows the dependency of the file
-
-" ***Guru commands***
-" :GoDescribe       Like :GoInfo but more detailed.
-" :GoImplements     Gives what interface it implements.
-" :GoWhicherrs      Shows possible err value.
-" :GoChannelPeers   Shows the allocation of a channel and where it's
-"                   sending/receiving from.
-" :GoCallee         Lists all the functions called.
-" :GoCaller         Lists all the caller of the function.
-" :GoCallStack      shows arbitray path from root to function.
-
-
-" Commands to run Go tools from VIM
-if has('autocmd')
-    au FileType go nmap <leader>gr <Plug>(go-run)
-    au FileType go nmap <leader>gb <Plug>(go-build)
-    au FileType go nmap <leader>gt <Plug>(go-test)
-    au FileType go nmap <leader>gc <Plug>(go-coverage)
-
-    " <leader>gd or ctrl-] jumps to definition by default then use ctrl-t
-    " jumps back to the previous location (instead of ctrl-o)
-
-    " Jump to the function definition in a new vertical split window
-    au FileType go nmap <Leader>ds <Plug>(go-def-split)
-
-    " Show the function signature in the status line
-    au FileType go nmap <Leader>gi <Plug>(go-info)
-    " Show function signature in the status
-    au FileType go map <F3> %:GoInfo<CR><C-o>
-    " Jump out of insert mode to run GoInfo to show signature in the status
-    au FileType go inoremap <F3> <C-o>%<C-o>:GoInfo<CR><C-o><C-o>
-
-    " Show the full documentation for function
-    au FileType go nmap <Leader>gf <Plug>(go-doc)
-
-    " Bring up the browser window with the right godoc.org page
-    au FileType go nmap <Leader>godoc <Plug>(go-doc-browser)
-
-    " Shows all types and function declaration to do quick fuzzy search of
-    " current file
-    au FileType go nmap <Leader>gz :GoDecls<CR>
-
-    " Like :GoDecls but searches the directory
-    au FileType go nmap <leader>gp :GoDeclsDir<cr>
-
-    " Toggle between foo.go and foo_test.go
-    au FileType go nmap <leader>ga :GoAlternate<cr>
-
-    " Code folding settings for Go
-    au FileType go set foldmethod=syntax
-    au FileType go set foldlevel=0
-endif
-
 " vim-godef settings
 "let g:godef_split=2
 "let g:godef_same_file_in_same_window=1
@@ -506,3 +416,97 @@ endif
 " To use echodoc, you must increase 'cmdheight' value.
 "set cmdheight=2
 "let g:echodoc_enable_at_startup = 1
+
+" **************************************************
+" *         Language Specific Settings             *
+" **************************************************
+
+" Strip out trailing white spaces for certain files
+autocmd FileType vim,c,cpp,java,php,textpb,markdown,html autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd BufWritePre *.py,*.md,*.pp,*.py,*.js,*.html,*.sdl,*.proto :%s/\s+$//e
+
+" Treat .template files as html files
+au BufNewFile,BufRead *.template set filetype=html
+" html and template files doesn't need the 80 column limit
+autocmd BufNewFile,BufRead *.html,*.template setlocal textwidth=300
+
+" ======= Golang Specific Stuff =======
+"filetype off
+"filetype plugin indent off
+"set runtimepath+=$GOROOT/misc/vim
+"filetype plugin indent on
+"syntax on
+"au FileType go au BufWritePre <buffer> Fmt
+
+" dif - 'd'eletes the function body (between the {}). yif - 'y'anks the body
+" content.
+" daf - 'd'eletes the whole function.
+" ]] jumps to next function (also accepts counts such as 5]] or v]])
+" [[ jumps to previous function (also accepts counts such as 5[[ or v[[)
+" ctrl-x ctrl-o auto-completes
+"
+" :GoSameIds highlights all the matching identifiers (e.g. vars, func)
+" :GoSameIdsClear clear highlights
+
+" :GoFiles lists all the files for the package
+" :GoDeps shows the dependency of the file
+
+" ***Guru commands***
+" :GoDescribe       Like :GoInfo but more detailed.
+" :GoImplements     Gives what interface it implements.
+" :GoWhicherrs      Shows possible err value.
+" :GoChannelPeers   Shows the allocation of a channel and where it's
+"                   sending/receiving from.
+" :GoCallee         Lists all the functions called.
+" :GoCaller         Lists all the caller of the function.
+" :GoCallStack      shows arbitray path from root to function.
+
+
+" Commands to run Go tools from VIM
+if has('autocmd')
+    autocmd FileType go setlocal tabstop=4
+    autocmd FileType go setlocal shiftwidth=4
+    au Filetype go set noshowmode
+    au FileType go nmap <leader>gr <Plug>(go-run)
+    au FileType go nmap <leader>gb <Plug>(go-build)
+    au FileType go nmap <leader>gt <Plug>(go-test)
+    au FileType go nmap <leader>gc <Plug>(go-coverage)
+
+    " <leader>gd or ctrl-] jumps to definition by default then use ctrl-t
+    " jumps back to the previous location (instead of ctrl-o)
+
+    " Jump to the function definition in a new vertical split window
+    au FileType go nmap <Leader>ds <Plug>(go-def-split)
+
+    " Show the function signature in the status line
+    au FileType go nmap <Leader>gi <Plug>(go-info)
+    " Show function signature in the status
+    au FileType go map <F3> %:GoInfo<CR><C-o>
+    " Jump out of insert mode to run GoInfo to show signature in the status
+    au FileType go inoremap <F3> <C-o>%<C-o>:GoInfo<CR><C-o><C-o>
+
+    " Show the full documentation for function
+    au FileType go nmap <Leader>gf <Plug>(go-doc)
+
+    " Bring up the browser window with the right godoc.org page
+    au FileType go nmap <Leader>godoc <Plug>(go-doc-browser)
+
+    " Shows all types and function declaration to do quick fuzzy search of
+    " current file
+    au FileType go nmap <Leader>gz :GoDecls<CR>
+
+    " Like :GoDecls but searches the directory
+    au FileType go nmap <leader>gp :GoDeclsDir<cr>
+
+    " Toggle between foo.go and foo_test.go
+    au FileType go nmap <leader>ga :GoAlternate<cr>
+
+    " Code folding settings for Go
+    au FileType go set foldmethod=syntax
+    au FileType go set foldlevel=0
+
+    " Have autocomplete pop-up when with '.' is pressed.
+    au FileType go inoremap <buffer> . .<C-x><C-o>
+endif
+
+
