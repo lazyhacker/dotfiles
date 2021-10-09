@@ -309,6 +309,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline_symbols = get(g:,'airline_symbols',{})
 let g:airline_powerline_fonts = 1
 let g:airline_symbols.maxlinenr=''
+let g:airline_symbols.colnr = ' ℅:'
 " remove separators
 "let g:airline_left_sep=' '
 "let g:airline_right_sep=' '
@@ -358,6 +359,8 @@ let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types = 1
 let g:go_highlight_variable_assignments = 0
 let g:go_highlight_variable_declarations = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
 " vim-godef settings
 "let g:godef_split=2
@@ -508,5 +511,3 @@ if has('autocmd')
     " Have autocomplete pop-up when with '.' is pressed.
     au FileType go inoremap <buffer> . .<C-x><C-o>
 endif
-
-
