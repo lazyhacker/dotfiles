@@ -8,8 +8,8 @@ conky.config = {
 
 -- Window specifications #
 	alignment = 'top_left',
-	gap_x = 1920,
-	gap_y = -510,
+	gap_x =  1920,
+	gap_y = -350,
 	minimum_width = 500, minimum_height = 800,
 	maximum_width = 300,
 	own_window = true,
