@@ -163,6 +163,10 @@ set foldlevel=2
 set novisualbell "don't beep
 set noerrorbells "don't beep
 
+" Always have the sign column (aka gutter) to be on so there's not a
+" visual shift when something shows is toggled on/off there.
+set signcolumn=yes
+
 " Have VIM recursively search upward for tag file
 set tags=tags;/
 
