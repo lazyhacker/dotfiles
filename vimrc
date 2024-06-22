@@ -50,6 +50,9 @@ call vundle#end()
 filetype plugin on
 filetype indent on
 
+" Enable omnifunc
+"set omnifunc=syntaxcomplete#Complete
+
 " Turn syntax highlighting on
 syntax on
 
@@ -69,7 +72,7 @@ set splitbelow
 set hidden
 
 " Insert mode completion options
-set completeopt=longest,menu,menuone
+set completeopt=longest,menu,menuone,noinsert
 "set completeopt=menu,menuone
 
 " Use UTF-8 as the default buffer encoding
@@ -363,6 +366,7 @@ let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types = 1
 let g:go_highlight_variable_assignments = 0
 let g:go_highlight_variable_declarations = 1
+let g:go_code_completion_enabled = 1
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
@@ -515,3 +519,6 @@ if has('autocmd')
     " Have autocomplete pop-up when with '.' is pressed.
     au FileType go inoremap <buffer> . .<C-x><C-o>
 endif
+
+" use gg=G to prettyfy XML file.
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
