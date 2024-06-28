@@ -175,3 +175,9 @@ fi
 #else
 #    start_agent;
 #fi
+
+# Tell CMake to use Ninja to build
+if [ -f /usr/bin/ninja ]; then
+    export CMAKE_GENERATOR=Ninja
+    #export CMAKE_MAKE_PROGRAM=/usr/bin/ninja
+fi
