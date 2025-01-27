@@ -34,6 +34,20 @@ To unset any settings:
 unlet g:<variable>
 ```
 
+To install local-only plugins, in your .vimrc you'll need to add
+
+```
+call vundle#begin()
+"Comment out if you want the checked-in list as well
+"source ~/.vim/plugins-vim
+
+Plugin "plugin-to-install"
+...
+
+call vundle#end()
+
+```
+
 BASH
 ----
 
