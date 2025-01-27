@@ -10,6 +10,7 @@ ln -s $HOME/dotfiles/conkyrc $HOME/.conkyrc
 
 echo "source $HOME/dotfiles/vimrc" >> $HOME/.vimrc
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+ln -s $HOME/dotfiles/plugins-vim $HOME/.vim/plugins-vim
 
 ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
 
