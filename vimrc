@@ -458,8 +458,13 @@ if has('autocmd')
 
     " Show the function signature in the status line
     au FileType go nmap <Leader>gi <Plug>(go-info)
+
     " Show function signature in the status
     au FileType go map <F3> %:GoInfo<CR><C-o>
+
+    " Bring up the browser window with the documentation
+    au FileType go map <F10> <Plug>(go-doc-browser)
+
     " Jump out of insert mode to run GoInfo to show signature in the status
     au FileType go inoremap <F3> <C-o>%<C-o>:GoInfo<CR><C-o><C-o>
 
