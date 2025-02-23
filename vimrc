@@ -217,7 +217,7 @@ nmap <F11> <leader>be
 
 " Toggle tag list
 nmap <F8> :TagbarToggle<cr>
-nmap <F9> :TagbarOpen fj<cr>
+nmap <s-F8> :TagbarOpen fj<cr>
 nmap <F12> :TagbarToggle<cr>
 
 " Close OmniComplete preview window after insert.
@@ -453,8 +453,14 @@ if has('autocmd')
     " <leader>gd or ctrl-] jumps to definition by default then use ctrl-t
     " jumps back to the previous location (instead of ctrl-o)
 
-    " Jump to the function definition in a new vertical split window
+    " Jump to the function definition in a new horizontal split window
     au FileType go nmap <Leader>ds <Plug>(go-def-split)
+
+   " Jump to function definition in a new vertical split window
+    au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+
+    " Jump to function definition in a new tab window
+    au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
     " Show the function signature in the status line
     au FileType go nmap <Leader>gi <Plug>(go-info)
@@ -462,17 +468,20 @@ if has('autocmd')
     " Show function signature in the status
     au FileType go map <F3> %:GoInfo<CR><C-o>
 
-    " Bring up the browser window with the documentation
-    au FileType go map <F10> <Plug>(go-doc-browser)
-
     " Jump out of insert mode to run GoInfo to show signature in the status
     au FileType go inoremap <F3> <C-o>%<C-o>:GoInfo<CR><C-o><C-o>
 
     " Show the full documentation for function
     au FileType go nmap <Leader>gf <Plug>(go-doc)
 
+    " Bring up the browser window with the documentation
+    au FileType go map <s-F9> <Plug>(go-doc-browser)
+
     " Bring up the browser window with the right godoc.org page
     au FileType go nmap <Leader>godoc <Plug>(go-doc-browser)
+
+    " Bring up the browser window with the documentation
+    au FileType go map <F9> <Plug>(go-doc)
 
     " Shows all types and function declaration to do quick fuzzy search of
     " current file

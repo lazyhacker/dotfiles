@@ -29,7 +29,7 @@ conky.config = {
     default_color = 'yellow',  -- Set default text color to yellow
     use_xft = true,
 
-    gap_x = -1070, gap_y = -425,  -- Adjust for spacing
+    gap_x = -1070, gap_y = -450,  -- Adjust for spacing
     font = 'Terminus:size=14',  -- Change font style/size if necessary
 
 };
