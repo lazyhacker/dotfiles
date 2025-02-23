@@ -1,0 +1,27 @@
+<leader>gd - (ctrl-]) Jumps to definition by default then use ctrl-t
+<leader>ds - Jump to the function definition in a new vertical split window
+<leader>gi - Show the function signature in the status line
+<leader>gf - Show the full documentation for function
+<leader>gz - Shows all types and function declaration with fuzzy search of current file
+<leader>gp - Like :GoDecls but searches the directory
+<leader>ga - Toggle between foo.go and foo_test.go
+<leader>godoc - Bring up the browser window with the right pkg doc
+<leader>gr - go-run
+<leader>gb - go-build
+<leader>gt - go-test
+<leader>gc - go-coverage
+
+F2  - Toggle NERDTree
+F3  - Show function definition in status line
+F4  - Toggle Paste mode
+F5  - Toggle line numbers
+F6  - Delete training white space
+F7  - Toggle Bufexplorer
+F8  - Toggle Tagbar
+F9  - Toggle and move cursor to Tagbar
+F10 - Package documentation
+
+<leader> => spacebar
+
+<C-o> - Jump back to previous position
+<C-x><C-o> - Have autocomplete pop-up

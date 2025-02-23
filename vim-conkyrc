@@ -8,17 +8,13 @@ conky.config = {
 
 -- Window specifications #
 	alignment = 'top_left',
-	gap_x = 1940,
-	gap_y = -450,
 	minimum_width = 500, minimum_height = 800,
-	maximum_width = 300,
 	own_window = true,
 	own_window_type = 'normal',-- other options are: override/dock/desktop/panel
 	own_window_transparent = false,
 	own_window_hints = 'undecorated,sticky,skip_taskbar,skip_pager,below',
 	border_inner_margin = 0,
 	border_outer_margin = 0,
---alignment middle_middle
 	own_window_argb_visual = true,
 	own_window_argb_value = 0,
 
@@ -30,30 +26,15 @@ conky.config = {
 	draw_borders = false,
 	draw_graph_borders = false,
 
--- Text settings #
-	use_xft = true,
-	xftalpha = 0,
-	font = 'Roboto:size=10',
-	text_buffer_size = 256,
-	override_utf8_locale = true,
-	override_utf8_locale = true,
-	imlib_cache_size = 0,
+    default_color = 'yellow',  -- Set default text color to yellow
+    use_xft = true,
 
--- Color scheme #
-	default_color = 'Magenta',
-	color1 = '#FFFFFF',
+    gap_x = -1070, gap_y = -425,  -- Adjust for spacing
+    font = 'Terminus:size=14',  -- Change font style/size if necessary
 
 };
 
 conky.text = [[
-\
-#-------CLOCK-------#
-\
-${font Roboto :size=64}${alignc}${time %I:%M}${font}
-\
-#------DATE------#
-\
-${font Roboto Light :size=14}${voffset 4}${alignc}${time %A %d %B}${font}
-\
-${font Terminus :size=12}${alignc}${execpi 60 DJS=`date +%_d`; cal | sed s/"\(^\|[^0-9]\)$DJS"'\b'/'\1${color green}'"$DJS"'$color'/ | sed ':a;N;$!ba;s/\n/\n${alignc}/g'}${font}
+${exec cat $HOME/dotfiles/vim.txt}
 ]];
+
