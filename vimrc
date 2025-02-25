@@ -503,3 +503,7 @@ endif
 
 " use gg=G to prettyfy XML file.
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+
+" Have bufExplorer open in current window rather then switch to the active
+" window.
+let g:bufExplorerFindActive=0
