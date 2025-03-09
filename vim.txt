@@ -26,3 +26,8 @@ s-F9 - Package doc in browser
 
 <C-o> - Jump back to previous position
 <C-x><C-o> - Have autocomplete pop-up
+gq - Selected text to 80 cols.
+xp - swap characters
+][ - Jump to end of next function
+[] - Jump to end of previous function
+`` - returns to previous position
