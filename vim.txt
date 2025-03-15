@@ -31,3 +31,10 @@ xp - swap characters
 ][ - Jump to end of next function
 [] - Jump to end of previous function
 `` - returns to previous position
+{  - Jump to function
+}  - Jump to next function
+
+---- BASH ----
+
+Alt-B Jump back 1 word
+
