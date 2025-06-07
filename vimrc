@@ -507,3 +507,6 @@ au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 " Have bufExplorer open in current window rather then switch to the active
 " window.
 let g:bufExplorerFindActive=0
+
+" Use the Ctrl-e to wrap instead of default Meta-e
+let g:AutoPairsShortcutFastWrap = '<C-e>'
