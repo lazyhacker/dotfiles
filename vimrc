@@ -289,6 +289,7 @@ let g:airline_symbols.colnr = ' ℅:'
 "let g:airline_right_sep=' '
 "let g:airline_detect_whitespace=0
 let g:airline#extensions#whitespace#enabled = 1
+"let g:airline#extensions#branch#enabled = 1
 
 " Limit Emmet Plugin to just HTLM and CSS files.
 let g:user_emmet_install_globals = 0

@@ -1,17 +1,17 @@
 conky.config = {
 -- Conky settings #
 	background = true,
-	update_interval = 1,
+	update_interval = 30,
 	double_buffer = true,
 	no_buffers = true,
 	imlib_cache_size = 10,
 
 -- Window specifications #
 	alignment = 'top_left',
-	gap_x = 1940,
+	gap_x = 1950,
 	gap_y = -450,
 	minimum_width = 500, minimum_height = 800,
-	maximum_width = 300,
+	-- maximum_width = 300,
 	own_window = true,
 	own_window_type = 'normal',-- other options are: override/dock/desktop/panel
 	own_window_transparent = false,
@@ -40,7 +40,7 @@ conky.config = {
 	imlib_cache_size = 0,
 
 -- Color scheme #
-	default_color = 'Magenta',
+    default_color = 'Magenta',
 	color1 = '#FFFFFF',
 
 };
@@ -49,11 +49,19 @@ conky.text = [[
 \
 #-------CLOCK-------#
 \
-${font Roboto :size=64}${alignc}${time %I:%M}${font}
+${font Roboto :size=64}${time %I:%M}${font}
+
 \
 #------DATE------#
 \
-${font Roboto Light :size=14}${voffset 4}${alignc}${time %A %d %B}${font}
+${font Roboto Light :size=14}${voffset 4}${time %A %d %B}${font}
 \
-${font Terminus :size=12}${alignc}${execpi 60 DJS=`date +%_d`; cal | sed s/"\(^\|[^0-9]\)$DJS"'\b'/'\1${color green}'"$DJS"'$color'/ | sed ':a;N;$!ba;s/\n/\n${alignc}/g'}${font}
+${font Terminus :size=12}${execpi 60 DJS=`date +%_d`; cal | sed s/"\(^\|[^0-9]\)$DJS"'\b'/'\1${color blue}'"$DJS"'$color'/ | sed ':a;N;$!ba;s/\n/\n/g'}${font}
+
+\
+#------Keyboard Shortcuts ---------#
+${voffset 800}
+\
+${font Terminus :size=14}${color black}${exec cat $HOME/dotfiles/vim.txt}${font}
+
 ]];
