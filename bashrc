@@ -39,7 +39,7 @@ fi
 #    source /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 #fi
 
-if [ -f `which powerline-daemon` ]; then
+if command -v powerline-daemon > /dev/null 2>&1; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
