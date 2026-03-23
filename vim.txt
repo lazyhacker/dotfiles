@@ -33,6 +33,7 @@ xp - swap characters
 `` - returns to previous position
 {  - Jump to function
 }  - Jump to next function
+<C-e> - Autopair Wrap
 
 ---- BASH ----
 
