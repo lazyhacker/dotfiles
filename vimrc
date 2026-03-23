@@ -277,26 +277,36 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " --- Airline ---
-let g:airline_theme='solarized'
+" Cache user and host at startup
+let g:vim_user = substitute(system('whoami'), '\n', '', '')
+let g:vim_host = substitute(system('hostname'), '\n', '', '')
+
+function! AirlineUserHost()
+  return g:vim_user . '@' . g:vim_host
+endfunction
+"let g:airline_theme='solarized'
 "let g:airline_enable_tagbar=1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline_symbols = get(g:,'airline_symbols',{})
 let g:airline_powerline_fonts = 1
 let g:airline_symbols.maxlinenr=''
 let g:airline_symbols.colnr = ' ℅:'
-let g:aireline_section_b=''
-" remove separators
+let g:airline#extensions#branch#vcs_priority = ['git']
+
+"" remove separators
 "let g:airline_left_sep=' '
 "let g:airline_right_sep=' '
 "let g:airline_detect_whitespace=0
 let g:airline#extensions#whitespace#enabled = 1
 "let g:airline#extensions#branch#enabled = 1
-let g:user_host = expand('$USER') . '@' . hostname()
-let g:airline_section_b = airline#section#create(['branch', ' ', g:user_host])
+" Define Section C: [Full File Path] [Read-Only] [User@Host]
+let g:airline_section_c = airline#section#create(['%<', '%F', ' ', 'readonly', '  ', '%{AirlineUserHost()}'])
 
+" --- Emmet ---
 " Limit Emmet Plugin to just HTLM and CSS files.
 let g:user_emmet_install_globals = 0
 autocmd FileType html,css EmmetInstall
+
 
 "" --- NeoComplete ---
 "let g:neocomplete#enable_at_startup = 1
