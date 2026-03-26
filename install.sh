@@ -6,6 +6,8 @@ echo "source $HOME/dotfiles/bash_profile" >> $HOME/.bash_profile
 
 echo "source $HOME/dotfiles/bashrc" >> $HOME/.bashrc
 
+echo "source-file $HOME/dotfiles/tmux.conf" >> $HOME/.tmux.conf
+
 ln -s $HOME/dotfiles/conkyrc $HOME/.conkyrc
 
 echo "source $HOME/dotfiles/vimrc" >> $HOME/.vimrc
