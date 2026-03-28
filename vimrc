@@ -278,12 +278,12 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " --- Airline ---
 " Cache user and host at startup
-let g:vim_user = substitute(system('whoami'), '\n', '', '')
-let g:vim_host = substitute(system('hostname'), '\n', '', '')
+"let g:vim_user = substitute(system('whoami'), '\n', '', '')
+"let g:vim_host = substitute(system('hostname'), '\n', '', '')
+"function! AirlineUserHost()
+"  return g:vim_user . '@' . g:vim_host
+"endfunction
 
-function! AirlineUserHost()
-  return g:vim_user . '@' . g:vim_host
-endfunction
 "let g:airline_theme='solarized'
 "let g:airline_enable_tagbar=1
 let g:airline#extensions#tagbar#enabled = 1
@@ -300,7 +300,8 @@ let g:airline#extensions#branch#vcs_priority = ['git']
 let g:airline#extensions#whitespace#enabled = 1
 "let g:airline#extensions#branch#enabled = 1
 " Define Section C: [Full File Path] [Read-Only] [User@Host]
-let g:airline_section_c = airline#section#create(['%<', '%F', ' ', 'readonly', '  ', '%{AirlineUserHost()}'])
+"let g:airline_section_c = airline#section#create(['%<', '%F', ' ', 'readonly', '  ', '%{AirlineUserHost()}'])
+let g:airline_section_c = airline#section#create(['%<', '%F', ' ', 'readonly'])
 
 " --- Emmet ---
 " Limit Emmet Plugin to just HTLM and CSS files.
