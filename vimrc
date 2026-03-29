@@ -287,11 +287,51 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "let g:airline_theme='solarized'
 "let g:airline_enable_tagbar=1
 let g:airline#extensions#tagbar#enabled = 1
-let g:airline_symbols = get(g:,'airline_symbols',{})
 let g:airline_powerline_fonts = 1
-let g:airline_symbols.maxlinenr=''
-let g:airline_symbols.colnr = ' ℅:'
 let g:airline#extensions#branch#vcs_priority = ['git']
+
+"let g:airline_symbols = get(g:,'airline_symbols',{})
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+"" unicode symbols
+"let g:airline_left_sep = '»'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.colnr = ' ㏇:'
+"let g:airline_symbols.colnr = ' ℅:'
+"let g:airline_symbols.crypt = '🔒'
+"let g:airline_symbols.executable = '⚙'
+"let g:airline_symbols.linenr = '☰'
+"let g:airline_symbols.linenr = ' ␊:'
+"let g:airline_symbols.linenr = ' ␤:'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.maxlinenr = ''
+"let g:airline_symbols.maxlinenr = '㏑'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.spell = 'Ꞩ'
+"let g:airline_symbols.notexists = 'Ɇ'
+"let g:airline_symbols.notexists = '∄'
+"let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.colnr = ' ℅:'
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ' :'
+"let g:airline_symbols.maxlinenr = '☰ '
+let g:airline_symbols.maxlinenr=''
+"let g:airline_symbols.dirty='⚡'
+"let g:airline_symbols.modified = ' 💾'
 
 "" remove separators
 "let g:airline_left_sep=' '
@@ -299,9 +339,9 @@ let g:airline#extensions#branch#vcs_priority = ['git']
 "let g:airline_detect_whitespace=0
 let g:airline#extensions#whitespace#enabled = 1
 "let g:airline#extensions#branch#enabled = 1
-" Define Section C: [Full File Path] [Read-Only] [User@Host]
-"let g:airline_section_c = airline#section#create(['%<', '%F', ' ', 'readonly', '  ', '%{AirlineUserHost()}'])
-let g:airline_section_c = airline#section#create(['%<', '%F', ' ', 'readonly'])
+" section c [Full File Path] [Modified] [Read-Only]
+"let g:airline_section_c = airline#section#create(['%<', '%F', ' ', 'modified', 'readonly'])
+
 
 " --- Emmet ---
 " Limit Emmet Plugin to just HTLM and CSS files.
