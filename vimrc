@@ -337,10 +337,12 @@ let g:airline_symbols.maxlinenr=''
 "let g:airline_left_sep=' '
 "let g:airline_right_sep=' '
 "let g:airline_detect_whitespace=0
+"
+"  Trailing whitespace 1=on, 0=off
 let g:airline#extensions#whitespace#enabled = 1
 "let g:airline#extensions#branch#enabled = 1
 " section c [Full File Path] [Modified] [Read-Only]
-"let g:airline_section_c = airline#section#create(['%<', '%F', ' ', 'modified', 'readonly'])
+"let g:airline_section_c = airline#section#create(['%<', '%F', ' ', '%m', 'readonly'])
 
 
 " --- Emmet ---
