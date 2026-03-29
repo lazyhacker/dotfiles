@@ -278,11 +278,11 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " --- Airline ---
 " Cache user and host at startup
-"let g:vim_user = substitute(system('whoami'), '\n', '', '')
-"let g:vim_host = substitute(system('hostname'), '\n', '', '')
-"function! AirlineUserHost()
-"  return g:vim_user . '@' . g:vim_host
-"endfunction
+let g:vim_user = substitute(system('whoami'), '\n', '', '')
+let g:vim_host = substitute(system('hostname'), '\n', '', '')
+function! AirlineUserHost()
+  return g:vim_user . '@' . g:vim_host
+endfunction
 
 "let g:airline_theme='solarized'
 "let g:airline_enable_tagbar=1
@@ -341,8 +341,8 @@ let g:airline_symbols.maxlinenr=''
 "  Trailing whitespace 1=on, 0=off
 let g:airline#extensions#whitespace#enabled = 1
 "let g:airline#extensions#branch#enabled = 1
-" section c [Full File Path] [Modified] [Read-Only]
-"let g:airline_section_c = airline#section#create(['%<', '%F', ' ', '%m', 'readonly'])
+" section c [Full File Path] [Modified] [Read-Only] [User@Host]
+let g:airline_section_c = airline#section#create(['%<', '%{AirlineUserHost()}','  ', '%F', ' ', '%m', 'readonly'])
 
 
 " --- Emmet ---
