@@ -1,5 +1,8 @@
-# Place a copy of this config to ~/.aerospace.toml
-# After that, you can edit ~/.aerospace.toml to your liking
+# Create a symlink to ~/.aerospace.toml
+# This config also uses SketchyBar and JankyBorders.
+# The configuration for SketchyBar should be in ~/.config/sketchybar.
+# To properly display SketchyBar will require installing Hack Nerd Font
+# and Nerd Font Symbols.
 
 # Config version for compatibility and deprecations
 # Fallback value (if you omit the key): config-version = 1
@@ -7,7 +10,16 @@ config-version = 2
 
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+#after-startup-command = []
+after-startup-command = [
+    'exec-and-forget sketchybar',
+    'exec-and-forget borders active_color=0xffE06C75 inactive_color=0xff414559 width=10.0',
+]
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+]
 
 # Start AeroSpace at login
 start-at-login = false
@@ -60,6 +72,10 @@ on-mode-changed = []
 # Global default (optional, only if you want accordion everywhere)
 # default-root-container-layout = 'accordion'
 
+[exec]
+    inherit-env-vars = true
+[exec.env-vars]
+    PATH = '/usr/local/bin:${PATH}'
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -76,12 +92,12 @@ on-mode-changed = []
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 
 [gaps]
-    inner.horizontal = 0
-    inner.vertical =   0
-    outer.left =       0
-    outer.bottom =     0
-    outer.top =        0
-    outer.right =      0
+inner.horizontal = 10
+inner.vertical =   10
+outer.left =       0
+outer.bottom =     0
+outer.top =        0
+outer.right =      70
 
 # Depending on the monitor config, tell Aerospace which monitor to use
 # in order of priority.
@@ -153,14 +169,14 @@ M = ['^Dell U23.*$', 'secondary', 'main']
     alt-7 = 'workspace 7'
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
-    alt-a = 'workspace A' 
-    alt-b = 'workspace B'   # Browser
+    alt-a = 'workspace A'
+    alt-b = 'workspace B'
     alt-c = 'workspace C'   # Claude
-    alt-d = 'workspace D' 
-    alt-e = 'workspace E' 
-    #alt-f = 'workspace F' 
+    alt-d = 'workspace D'
+    alt-e = 'workspace E'
+    #alt-f = 'workspace F'
     alt-f = 'fullscreen'
-    alt-g = 'workspace G'   # Gemini
+    alt-g = 'workspace G'   # Google Gemini
     #alt-h = 'workspace H'
     alt-i = 'workspace I'
     #alt-j = 'workspace J'
@@ -173,7 +189,7 @@ M = ['^Dell U23.*$', 'secondary', 'main']
     alt-q = 'workspace Q'
     alt-r = 'workspace R'
     alt-s = 'workspace S'
-    alt-t = 'workspace T'   # Terminal  
+    alt-t = 'workspace T'   # Terminal
     alt-u = 'workspace U'
     alt-v = 'workspace V'
     alt-w = 'workspace W'
@@ -276,6 +292,10 @@ run = "move-node-to-workspace Z"
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'finder'
+run ='layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Preview'
 run ='layout floating'
 
 [[on-window-detected]]

@@ -1,0 +1,106 @@
+#!/bin/bash
+
+# Color Palette
+BLACK=0xff181926
+WHITE=0xffcad3f5
+RED=0xffed8796
+GREEN=0xffa6da95
+BLUE=0xff8aadf4
+YELLOW=0xffeed49f
+ORANGE=0xfff5a97f
+MAGENTA=0xffc6a0f6
+GREY=0xff939ab7
+TRANSPARENT=0x00000000
+
+# General bar colors
+BAR_COLOR=0xcc24273a #$GREY # Grey bar
+ICON_COLOR=$WHITE # Color of all icons
+LABEL_COLOR=$WHITE # Color of all labels
+
+POPUP_BACKGROUND_COLOR=$BLACK
+POPUP_BORDER_COLOR=$WHITE
+
+SHADOW_COLOR=$BLACK
+
+# Item specific special colors
+SPOTIFY_GREEN=$GREEN
+
+PADDINGS=3 # All paddings use this value (icon, label, background)
+
+FONT="Hack Nerd Font"
+
+sketchybar --add event aerospace_workspace_change
+
+
+# Set up the general appearance of Sketchybar
+# Setting up the general bar appearance and default values
+sketchybar --bar     height=50                                         \
+                     color=$BAR_COLOR                                  \
+                     shadow=$SHADOW                                    \
+                     position=right                                    \
+                     sticky=on                                         \
+                     padding_right=18                                  \
+                     padding_left=18                                   \
+                     corner_radius=9                                   \
+                     y_offset=10                                       \
+                     margin=10                                         \
+                     blur_radius=20                                    \
+                                                                       \
+           --default updates=when_shown                                \
+                     icon.font="$FONT:Bold:20.0"                       \
+                     icon.color=$ICON_COLOR                            \
+                     icon.padding_left=$PADDINGS                       \
+                     icon.padding_right=$PADDINGS                      \
+                     label.font="$FONT:Semibold:18.0"                  \
+                     label.color=$LABEL_COLOR                          \
+                     label.padding_left=$PADDINGS                      \
+                     label.padding_right=$PADDINGS                     \
+                     background.padding_right=$PADDINGS                \
+                     background.padding_left=$PADDINGS                 \
+                     popup.background.border_width=2                   \
+                     popup.background.corner_radius=11                 \
+                     popup.background.border_color=$POPUP_BORDER_COLOR \
+                     popup.background.color=$POPUP_BACKGROUND_COLOR    \
+                     popup.background.shadow.drawing=$SHADOW
+
+# Each workspace gets one ID item followed by MAX_APPS icon slots.
+# In the vertical bar these stack top-to-bottom:
+#   space.$sid        — workspace ID label (with focus highlight)
+#   space.$sid.app.1  — first app icon (hidden when empty)
+#   space.$sid.app.2  — second app icon (hidden when empty)
+#   …
+MAX_APPS=8
+
+for sid in $(aerospace list-workspaces --monitor all); do
+    sketchybar --add item "space.$sid" left \
+        --subscribe "space.$sid" aerospace_workspace_change front_app_switched \
+        --set "space.$sid" \
+            updates=on \
+            drawing=off \
+            background.color=0x11ffffff \
+            background.corner_radius=5 \
+            background.height=22 \
+            background.drawing=on \
+            background.padding_right=8 \
+            icon.drawing=off \
+            label="$sid" \
+            label.font="SF Mono:Bold:16.0" \
+            label.color=$YELLOW \
+            click_script="aerospace workspace $sid" \
+            script="$CONFIG_DIR/aerospace.sh $sid"
+
+    for i in $(seq 1 $MAX_APPS); do
+        sketchybar --add item "space.$sid.app.$i" left \
+            --set "space.$sid.app.$i" \
+                drawing=off \
+                icon.drawing=off \
+                label="" \
+                label.font="$FONT:Regular:14.0" \
+                label.color=$BLUE \
+                click_script="aerospace workspace $sid"
+    done
+done
+
+FOCUSED=$(aerospace list-workspaces --focused 2>/dev/null)
+sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE="$FOCUSED"
+sketchybar --update
