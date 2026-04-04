@@ -27,6 +27,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'lifepillar/vim-solarized8'
+Plugin 'vimwiki/vimwiki'
 " Plugins from vim-scripts.org (git mirror of vim.org).
 "Plugin 'taglist.vim'
 "Plugin 'Command-T'

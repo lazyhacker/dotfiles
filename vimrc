@@ -567,3 +567,32 @@ let g:bufExplorerFindActive=0
 
 " Use the Ctrl-e to wrap instead of default Meta-e
 let g:AutoPairsShortcutFastWrap = '<C-e>'
+
+
+" -----------  Vim Wiki -------------
+
+" Set location to Documents and have markdown as the default
+let g:vimwiki_list = [{'path': '~/Documents/notes',
+                      \ 'syntax': 'markdown', 'ext': 'md'}]
+
+" Restrict VimWiki to only places where VimWiki files are listed
+let g:vimwiki_global_ext = 0
+
+" disabling accidently creating new wiki and link for normal markdown files
+let g:vimwiki_ext2syntax = {}
+
+
+" Change vimwiki leader to avoid conflict with saving
+ let g:vimwiki_map_prefix = '<Leader>n'
+
+" Disable default key binding <leader>w since it conflicts with saving and
+" remap.
+"let g:vimwiki_concepts_g_prefix = 0
+"let g:vimwiki_key_mappings = { 'all_maps': 0 }
+"" Open the index
+"nnoremap <leader>ni :VimwikiIndex<CR>
+"" Open today's diary
+"nnoremap <leader>nd :VimwikiDiaryIndex<CR>
+"" Make tomorrow's/today's note
+"nnoremap <leader>nn :VimwikiMakeDiaryNote<CR>
+
