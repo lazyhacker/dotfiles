@@ -4,7 +4,16 @@
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 get_icon() {
-    case "$1" in
+    local app="$1"
+    local window="${2:-}"
+
+    # Check window title first (for apps like iTerm2 that set meaningful window names)
+    case "$window" in
+        "Claude CLI") echo "󰯉" ; return ;;
+        "Claude") echo "" ; return ;;
+    esac
+
+    case "$app" in
         # --- Apple / macOS ---
         "Finder") echo "" ;;  # nf-dev-apple U+0E711
         "System Preferences") echo "" ;;  # nf-cod-settings_gear U+0EB51
@@ -60,7 +69,7 @@ get_icon() {
         "Code - Insiders") echo "" ;;  # nf-dev-visualstudio U+0E70C
         "VSCodium") echo "" ;;  # nf-dev-visualstudio U+0E70C
         "Cursor") echo "" ;;  # nf-dev-visualstudio U+0E70C
-        "Xcode") echo "" ;;  # nf-dev-apple U+0E711
+        "Excalidraw") echo "󰞇" ;;   
         "IntelliJ IDEA") echo "" ;;  # nf-dev-intellij U+0E7B5
         "GoLand") echo "" ;;  # nf-dev-intellij U+0E7B5
         "Rider") echo "" ;;  # nf-dev-intellij U+0E7B5
@@ -81,7 +90,8 @@ get_icon() {
         "Bitwarden") echo "" ;;  # nf-fa-key U+0F084
         # --- LLMs ---
         "Google Gemini") echo "󰟍" ;; 
-        "Claude") echo "" ;;
+        "Insight") echo "" ;;
+        "AI4I Enterprise Chat") echo "" ;;
         *)         echo "" ;;  # nf-cod-window U+0EB7F
     esac
 }
@@ -89,9 +99,9 @@ get_icon() {
 WORKSPACE_ID="$1"
 MAX_APPS=8
 
-# Get unique app names in this workspace
+# Get unique app+window combinations in this workspace (app-name|window-title)
 APPS=$(aerospace list-windows --workspace "$WORKSPACE_ID" \
-    --format "%{app-name}" 2>/dev/null | sort -u)
+    --format "%{app-name}|%{window-title}" 2>/dev/null | sort -u)
 
 # Determine focus state
 FOCUSED="${FOCUSED_WORKSPACE:-$(aerospace list-workspaces --focused 2>/dev/null)}"
@@ -99,10 +109,12 @@ FOCUSED="${FOCUSED_WORKSPACE:-$(aerospace list-workspaces --focused 2>/dev/null)
 # Fill app icon slots — one icon per item, stacked vertically
 APP_COUNT=0
 i=1
-while IFS= read -r app; do
-    [ -z "$app" ] && continue
+while IFS= read -r line; do
+    [ -z "$line" ] && continue
     [ $i -gt $MAX_APPS ] && break
-    sketchybar --set "space.$WORKSPACE_ID.app.$i" drawing=on label="$(get_icon "$app")"
+    app="${line%%|*}"
+    window="${line#*|}"
+    sketchybar --set "space.$WORKSPACE_ID.app.$i" drawing=on label="$(get_icon "$app" "$window")"
     i=$((i + 1))
     APP_COUNT=$((APP_COUNT + 1))
 done <<< "$APPS"
