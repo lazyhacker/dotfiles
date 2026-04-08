@@ -172,7 +172,7 @@ noremap   <Right>  <NOP>
 
 " Quickly edit/reload vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nmap <silent> <leader>r :so $MYVIMRC<CR>
 
 " <Space>w to save a file
 nnoremap <Leader>w :w<CR>
@@ -200,7 +200,10 @@ imap <C-c> <C-o>vgG
 nmap <F2> :NERDTreeToggle<CR>
 
 " Use <F6> to delete trailing white space
-:nnoremap <silent> <F6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+":nnoremap <silent> <F6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
+" Write trim -- remove trailing white spaces
+nnoremap <leader>wt :%s/\s\+$//e<CR>
 
 " Use <F4> to toggle paste mode
 set pastetoggle=<F4>
@@ -213,12 +216,12 @@ nmap <silent> <F5> :set number!<CR>
 
 " Bufexplorer plugin toggle
 nmap <F7> <leader>be
-nmap <F11> <leader>be
+"nmap <F11> <leader>be
 
 " Toggle tag list
 nmap <F8> :TagbarToggle<cr>
 nmap <s-F8> :TagbarOpen fj<cr>
-nmap <F12> :TagbarToggle<cr>
+"nmap <F12> :TagbarToggle<cr>
 
 " Close OmniComplete preview window after insert.
 "if has('autocmd')

@@ -15,15 +15,16 @@ F2   - Toggle NERDTree
 F3   - Show function definition in status line
 F4   - Toggle Paste mode
 F5   - Toggle line numbers
-F6   - Delete training white space
+F6   -
 F7   - Toggle Bufexplorer
 F8   - Toggle Tagbar
 s-F8 - Toggle and move cursor to Tagbar
-F9   - Package documentation in vim 
-s-F9 - Package doc in browser 
-
+F9   - Package documentation in vim
+s-F9 - Package doc in browser
+F10  - (Tmux) Pop-up shell
 <leader> => spacebar
 
+<leader>wt - Delete trailing spaces
 <C-o> - Jump back to previous position
 <C-x><C-o> - Have autocomplete pop-up
 gq - Selected text to 80 cols.
@@ -34,8 +35,8 @@ xp - swap characters
 {  - Jump to function
 }  - Jump to next function
 <C-e> - Autopair Wrap
+<C-o>x - Delete single char from pair
 
 ---- BASH ----
 
 Alt-B Jump back 1 word
-
