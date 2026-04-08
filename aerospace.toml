@@ -22,7 +22,7 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 ]
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -94,15 +94,16 @@ on-mode-changed = []
 [gaps]
 inner.horizontal = 10
 inner.vertical =   10
-outer.left =       0
+outer.left =       10
 outer.bottom =     0
 outer.top =        0
 outer.right =      70
 
 # Depending on the monitor config, tell Aerospace which monitor to use
 # in order of priority.
+# https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-M = ['^Dell U23.*$', 'secondary', 'main']
+M = ['^Dell U23.*$', 3, 'secondary', 'main']
 #3 = '^DELL U2311H'  # Vertical Dell Monitor
 
 
@@ -155,6 +156,16 @@ M = ['^Dell U23.*$', 'secondary', 'main']
     alt-shift-k = 'move up'
     alt-shift-l = 'move right'
 
+    alt-shift-ctrl-h = ['join-with left', 'mode main']
+    alt-shift-ctrl-j = ['join-with down', 'mode main']
+    alt-shift-ctrl-k = ['join-with up', 'mode main']
+    alt-shift-ctrl-l = ['join-with right', 'mode main']
+
+    alt-shift-up = 'move-workspace-to-monitor up'
+    alt-shift-down = 'move-workspace-to-monitor down'
+    alt-shift-left = 'move-workspace-to-monitor left'
+    alt-shift-right = 'move-workspace-to-monitor right'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
     alt-minus = 'resize smart -50'
     alt-equal = 'resize smart +50'
@@ -178,11 +189,11 @@ M = ['^Dell U23.*$', 'secondary', 'main']
     alt-f = 'fullscreen'
     alt-g = 'workspace G'   # Google Gemini
     #alt-h = 'workspace H'
-    alt-i = 'workspace I'
+    alt-i = 'workspace I'   # Insight, AI4H
     #alt-j = 'workspace J'
     #alt-k = 'workspace K'
     #alt-l = 'workspace L'
-    alt-m = ['workspace M','layout v_accordion'] # Outlook & Slack
+    alt-m = ['workspace M','layout v_accordion'] # Outlook, Slack
     alt-n = 'workspace N'
     alt-o = ['workspace O', 'layout v_tiles'] # Obsidian
     alt-p = 'workspace P'
@@ -257,7 +268,7 @@ M = ['^Dell U23.*$', 'secondary', 'main']
 
 [[on-window-detected]]
 # iTerm2 and Terminals
-if.app-id = 'com.googlecode.iterm2'
+if.window-title-regex-substring = 'Terminus'
 run = "move-node-to-workspace T"
 
 [[on-window-detected]]
@@ -286,6 +297,11 @@ if.app-id = 'com.google.Chrome.app.gdfaincndogidkdcdkhapmbffkckdkhn'
 run = "move-node-to-workspace G"
 
 [[on-window-detected]]
+# Excalidraw
+if.app-id = 'com.google.Chrome.app.dnfpoenibinnbbckgbhendmlljoobcfg'
+run = "move-node-to-workspace E"
+
+[[on-window-detected]]
 # Zoom
 if.app-id = 'us.zoom.xos'
 run = "move-node-to-workspace Z"
@@ -295,9 +311,27 @@ if.app-name-regex-substring = 'finder'
 run ='layout floating'
 
 [[on-window-detected]]
+if.window-title-regex-substring = 'claude'
+run = 'move-node-to-workspace C'
+
+[[on-window-detected]]
 if.app-id = 'com.apple.Preview'
+run ='layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.wails.IntuitDeveloperDesktopApp'
 run ='layout floating'
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
 run ='move-node-to-workspace O'
+
+[[on-window-detected]]
+# Insight
+if.app-id = 'com.google.Chrome.app.faikmkhfbckgnonaoohnggpacmmnnlfj'
+run ='move-node-to-workspace I'
+
+[[on-window-detected]]
+# AI4I Enterprise Chat
+if.app-id = 'com.google.Chrome.app.iogcpekgmnnmniiefclpdifcbfmdlgmh'
+run ='move-node-to-workspace I'
