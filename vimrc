@@ -605,3 +605,25 @@ let g:vimwiki_ext2syntax = {}
 "" Make tomorrow's/today's note
 "nnoremap <leader>nn :VimwikiMakeDiaryNote<CR>
 
+" To disable startify: let g:startify_disable_at_vimenter = 0
+let g:startify_custom_header = [
+    \ ' _                    _   _            _              ',
+    \ '| |    __ _ _____   _| | | | __ _  ___| | _____ _ __ ',
+    \ '| |   / _` |_  / | | | |_| |/ _` |/ __| |/ / _ \ ''__| ',
+    \ '| |__| (_| |/ /| |_| |  _  | (_| | (__|   <  __/ |   ',
+    \ '|_____\__,_/___|\__, |_| |_|\__,_|\___|_|\_\___|_|   ',
+    \ '               |___/                                 ',
+    \ ]
+
+let g:startify_bookmarks = [
+            \ { 'b': '~/dotfiles/bashrc' },
+            \ { 't': '~/dotfiles/tmux.conf' },
+            \ { 'v': '~/dotfiles/vimrc' },
+            \ { 'n': '~/Documents/notes/notes.md' },
+            \ ]
+
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ ]
