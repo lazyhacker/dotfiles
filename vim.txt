@@ -39,4 +39,4 @@ xp - swap characters
 
 ---- BASH ----
 
-Alt-B Jump back 1 word
+ESC B | F - Move back or forward 1 word

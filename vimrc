@@ -185,13 +185,19 @@ nnoremap q <Nop> " turns off the q key
 " Jump to the matching braces/parans and highlight everything in between
 "noremap % v%
 
-" Key mappings in INSERT mode
+" --- Key mappings in INSERT mode
+
+" Exit out of insert mode:
 imap ;; <Esc>
 imap jk <Esc>
-imap <C-h> <Left>
-imap <C-j> <Down>
-imap <C-k> <Up>
-imap <C-l> <Right>
+
+" Navigate while in insert mode.
+"imap <C-h> <Left>
+"imap <C-j> <Down>
+"imap <C-k> <Up>
+"imap <C-l> <Right>
+
+" Paste in insert mode.
 imap <C-v> <C-o><S-p>
 imap <C-u> <C-o>u
 imap <C-c> <C-o>vgG
