@@ -23,8 +23,9 @@ filetype indent on
 " Turn syntax highlighting on
 syntax on
 
-" turn on line number
+" turn on hybrid line number and relative number
 set number
+set relativenumber
 
 " Write contents of the file, if it has been modified, on buffer exit
 set autowrite
@@ -220,7 +221,7 @@ nnoremap <leader>wt :%s/\s\+$//e<CR>
 set pastetoggle=<F4>
 
 " use <F5> to toggle line numbers
-nmap <silent> <F5> :set number!<CR>
+nmap <silent> <F5> :set number! relativenumber!<CR>
 
 " Build tags for current directory
 "nmap <F9> :!/usr/bin/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
