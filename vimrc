@@ -582,7 +582,7 @@ let g:AutoPairsShortcutFastWrap = '<C-e>'
 
 " Set location to Documents and have markdown as the default
 let g:vimwiki_list = [{'path': '~/Documents/notes',
-                      \ 'syntax': 'markdown', 'ext': 'md'}]
+                      \ 'syntax': 'markdown', 'ext': 'md', 'index': 'index'}]
 
 " Restrict VimWiki to only places where VimWiki files are listed
 let g:vimwiki_global_ext = 0
@@ -606,6 +606,10 @@ let g:vimwiki_ext2syntax = {}
 "nnoremap <leader>nn :VimwikiMakeDiaryNote<CR>
 
 " To disable startify: let g:startify_disable_at_vimenter = 0
+
+" set key to jump to startify page
+nnoremap <leader>s :Startify<CR>
+
 let g:startify_custom_header = [
     \ ' _                    _   _            _              ',
     \ '| |    __ _ _____   _| | | | __ _  ___| | _____ _ __ ',
