@@ -178,9 +178,14 @@ nmap <silent> <leader>r :so $MYVIMRC<CR>
 nnoremap <Leader>w :w<CR>
 
 " Stop the stupid record window that I never use
-nnoremap Q q     " capital Q to start/stop recording
-nnoremap q <Nop> " turns off the q key
-"map q: :q
+" Move macro recording to Capital Q
+nnoremap Q q
+" Disable lowercase q to prevent accidental recordings
+nnoremap q <Nop>
+" Disable the Command-line Window (the 'stupid record window')
+nnoremap q: <Nop>
+nnoremap q/ <Nop>
+nnoremap q? <Nop>
 
 " Jump to the matching braces/parans and highlight everything in between
 "noremap % v%
