@@ -633,7 +633,7 @@ let g:startify_bookmarks = [
             \ ]
 
 let g:startify_lists = [
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
         \ { 'type': 'files',     'header': ['   MRU']            },
         \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
         \ ]
