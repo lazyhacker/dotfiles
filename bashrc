@@ -1,5 +1,6 @@
 alias bd='popd >> /dev/null'
 alias cd='cd -P'
+alias :qa='exit'
 
 export HISTCONTROL=ignoredups:erasedups
 export HISTIGNORE="&:[]*:exit:ls"
@@ -181,3 +182,23 @@ if [ -f /usr/bin/ninja ]; then
     export CMAKE_GENERATOR=Ninja
     #export CMAKE_MAKE_PROGRAM=/usr/bin/ninja
 fi
+
+command_not_found_handle() {
+    if [[ $1 == :* ]]; then
+        # Remove the leading colon
+        local cmd="${1#:}"
+
+        # Map specific vim commands to tmux commands
+        case "$cmd" in
+            q)  exit ;;
+            qa) tmux kill-session ;;
+            vs) tmux split-window -h ;;
+            sp) tmux split-window -v ;;
+            *)  echo "Vim habit detected, but no tmux mapping for: $cmd" ;;
+        esac
+    else
+        # Standard error if it's not a :command
+        echo "bash: $1: command not found"
+        return 127
+    fi
+}
