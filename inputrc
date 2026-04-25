@@ -9,3 +9,18 @@ set vi-cmd-mode-string \1\e[2 q\2
 # Reduce delay when hitting ESC
 set keyseq-timeout 0
 
+$if mode=vi
+    # Commands for Insert Mode
+    set keymap vi-insert
+    "\C-p": history-search-backward
+    "\C-n": history-search-forward
+    "\C-a": beginning-of-line
+    "\C-e": end-of-line
+
+    # Optional: Keep them in Normal Mode too
+    set keymap vi-command
+    "\C-p": history-search-backward
+    "\C-n": history-search-forward
+    "\C-a": beginning-of-line
+    "\C-e": end-of-line
+$endif
