@@ -639,3 +639,40 @@ let g:startify_lists = [
         \ { 'type': 'files',     'header': ['   MRU']            },
         \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
         \ ]
+
+" -------  Popup for showing the shortcuts.
+function! MyPopupFilter(winid, key)
+    " Close on Escape, 'q', or 'x'
+    if a:key == "\<Esc>" || a:key == 'q' || a:key == 'x'
+        call popup_close(a:winid)
+        return 1
+    " Scroll Down with 'j' or Down Arrow
+    elseif a:key == 'j' || a:key == "\<Down>"
+        call win_execute(a:winid, "normal! \<C-e>")
+        return 1
+    " Scroll Up with 'k' or Up Arrow
+    elseif a:key == 'k' || a:key == "\<Up>"
+        call win_execute(a:winid, "normal! \<C-y>")
+        return 1
+    endif
+    " Return 0 to let Vim handle other keys (or 1 to keep it 'frozen')
+    return 1
+endfunction
+
+function! ShowFilePopup(filename)
+    let l:path = expand(a:filename)
+    if filereadable(l:path)
+        let l:lines = readfile(l:path)
+        let l:winid = popup_create(l:lines, {
+            \ 'title': ' ' . a:filename . ' ',
+            \ 'pos': 'center',
+            \ 'width': 60,
+            \ 'height': 15,
+            \ 'border': [],
+            \ 'padding': [1,1,1,1],
+            \ 'filter': 'MyPopupFilter',
+            \ })
+    endif
+endfunction
+
+nnoremap <leader>? :call ShowFilePopup("~/dotfiles/shortcuts.txt")<CR>
