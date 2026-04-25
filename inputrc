@@ -1,0 +1,11 @@
+# Changing cursor shape for modes
+set editing-mode vi
+set show-mode-in-prompt on
+
+# 5 = blinking bar (Insert), 2 = solid block (Normal)
+set vi-ins-mode-string \1\e[5 q\2
+set vi-cmd-mode-string \1\e[2 q\2
+
+# Reduce delay when hitting ESC
+set keyseq-timeout 0
+
