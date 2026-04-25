@@ -9,7 +9,7 @@ conky.config = {
 -- Window specifications #
 	alignment = 'bottom_left',
 	gap_x = 1950,
-	gap_y = -300,
+	gap_y = -350,
 	minimum_width = 1000, 
     --minimum_height = 800,
 	-- maximum_width = 300,
@@ -24,7 +24,7 @@ conky.config = {
     
     -- Opacity (0-255)
     -- 0 is fully transparent, 255 is opaque
-	own_window_argb_value = 50,
+	own_window_argb_value = 80,
     own_window_colour = '#000000',
 
 -- Graphics settings #
@@ -45,8 +45,7 @@ conky.config = {
 	imlib_cache_size = 0,
 
 -- Color scheme #
-    default_color = 'Black',
-	color1 = '#FFFFFF',
+    default_color = '#FFFFFF',
 
 };
 
