@@ -1,3 +1,5 @@
+<leader> = spacebar
+
 <leader>gd - (ctrl-]) Jumps to definition by default then use ctrl-t
 <leader>d[v|s] - Jump to the function definition in a new vertical|horizontal split window
 <leader>gi - Show the function signature in the status line
@@ -22,7 +24,6 @@ s-F8 - Toggle and move cursor to Tagbar
 F9   - Package documentation in vim
 s-F9 - Package doc in browser
 F10  - (Tmux) Pop-up shell
-<leader> => spacebar
 
 <leader>wt - Delete trailing spaces
 <C-o> - Jump back to previous position
@@ -34,6 +35,8 @@ xp - swap characters
 `` - returns to previous position
 {  - Jump to function
 }  - Jump to next function
+(  - Previous sentence
+)  - Next Sentence
 <C-e> - Autopair Wrap
 <C-o>x - Delete single char from pair
 
