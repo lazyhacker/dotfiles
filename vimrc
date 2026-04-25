@@ -97,6 +97,9 @@ set updatecount=50
 " case-sensative search
 set ignorecase
 
+" Enable spell checker for specific files types
+autocmd FileType markdown,tex setlocal spell spelllang=en_us
+
 " Remember things between sessions
 "
 " '20  - remember marks for 20 previous files
@@ -595,7 +598,6 @@ let g:vimwiki_global_ext = 0
 
 " disabling accidently creating new wiki and link for normal markdown files
 let g:vimwiki_ext2syntax = {}
-
 
 " Change vimwiki leader to avoid conflict with saving
  let g:vimwiki_map_prefix = '<Leader>n'
