@@ -39,7 +39,3 @@ xp - swap characters
 
 <leader>nw - open wiki index file
 <leader>ns - list and select wiki
-
----- BASH ----
-
-ESC B | F - Move back or forward 1 word
