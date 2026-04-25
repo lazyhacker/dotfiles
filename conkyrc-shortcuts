@@ -22,16 +22,9 @@ conky.config = {
 --alignment middle_middle
 	own_window_argb_visual = true,
     
-    -- Opacity (0-255)
-    -- 0 is fully transparent, 255 is opaque
-	own_window_argb_value = 80,
-    own_window_colour = '#000000',
-
 -- Graphics settings #
 	draw_shades = false,
-	default_shade_color = '#AAAAAA',
 	draw_outline = false,
-	default_outline_color = '#AAAAAA',
 	draw_borders = false,
 	draw_graph_borders = false,
 
@@ -45,7 +38,15 @@ conky.config = {
 	imlib_cache_size = 0,
 
 -- Color scheme #
-    default_color = '#FFFFFF',
+    -- Opacity (0-255)
+    -- 0 is fully transparent, 255 is opaque
+	own_window_argb_value = 125,
+
+    own_window_colour = '#000000',
+	default_shade_color = '#AAAAAA',
+	default_outline_color = '#AAAAAA',
+
+    default_color = '#F5F5DC',
 
 };
 
