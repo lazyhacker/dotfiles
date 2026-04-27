@@ -39,6 +39,6 @@ xp - swap characters
 )  - Next Sentence
 <C-e> - Autopair Wrap
 <C-o>x - Delete single char from pair
-
+<C-t>, <C-d>, <C-w>, <C-u>  - Indent, Outdent in INSERT mode, Delete the prefix
 <leader>nw - open wiki index file
 <leader>ns - list and select wiki
