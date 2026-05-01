@@ -194,6 +194,9 @@ command_not_found_handle() {
             qa) tmux kill-session ;;
             vs) tmux split-window -h ;;
             sp) tmux split-window -v ;;
+            bn) tmux next-window ;;
+            bp) tmux previous-window ;;
+
             *)  echo "Vim habit detected, but no tmux mapping for: $cmd" ;;
         esac
     else
