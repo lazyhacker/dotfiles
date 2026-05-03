@@ -23,3 +23,5 @@ vim -u ~/.vimrc -T dumb -n -i NONE -es \
 ln -s $CURRENT_DIR/tmux.conf $HOME/.tmux.conf
 
 ln -s $CURRENT_DIR/dir_colors $HOME/.dircolors
+
+ln -s $CURRENT_DIR/takuya-modified.omp.json $HOME/.oh-my-posh.omp.json

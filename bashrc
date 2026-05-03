@@ -106,21 +106,21 @@ command_not_found_handle() {
     fi
 }
 
+#if command -v powerline-daemon > /dev/null 2>&1; then
+#  powerline-daemon -q
+#  POWERLINE_BASH_CONTINUATION=1
+#  POWERLINE_BASH_SELECT=1
+#  if [ -f /usr/share/powerline/bash/powerline.sh ]; then
+#    . /usr/share/powerline/bash/powerline.sh
+#  fi
+#  if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
+#    . /usr/share/powerline/bindings/bash/powerline.sh
+#  fi
+#fi
+
 # --------------------------------------------------------
 # Customize the command prompt.
 # --------------------------------------------------------
-
-if command -v powerline-daemon > /dev/null 2>&1; then
-  powerline-daemon -q
-  POWERLINE_BASH_CONTINUATION=1
-  POWERLINE_BASH_SELECT=1
-  if [ -f /usr/share/powerline/bash/powerline.sh ]; then
-    . /usr/share/powerline/bash/powerline.sh
-  fi
-  if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
-    . /usr/share/powerline/bindings/bash/powerline.sh
-  fi
-fi
 
 # Set prompt styling.
 reset_style='\[\033[00m\]'
@@ -162,10 +162,16 @@ function prompt_command {
     fi
 }
 
+# Use oh-my-posh as default if available
+if command -v oh-my-posh >/dev/null 2>&1; then
+    eval "$(oh-my-posh init bash --config ~/.oh-my-posh.omp.json)"
+else
+    PROMPT_COMMAND=prompt_command
+fi
+
 # Overrides for Darwin/MacOS
 if [ $(uname) = 'Darwin' ]; then
     export LSCOLORS='fxFxcxdxbxegedabagacad'
     alias ls='ls -G'
 fi # Darwin
 
-PROMPT_COMMAND=prompt_command
