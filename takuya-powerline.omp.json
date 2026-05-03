@@ -20,7 +20,7 @@
           "powerline_symbol": "\ue0b0",
           "background": "#ef5350",
           "foreground": "#FFFB38",
-          "template": " # "
+          "template": " \ue0c1 "
         },
         {
           "type": "path",
@@ -46,7 +46,7 @@
           ],
           "foreground": "#011627",
           "properties": {
-            "branch_icon": " ",
+            "branch_icon": "\ue0a0 ",
             "fetch_status": true,
             "fetch_upstream_icon": true
           },
