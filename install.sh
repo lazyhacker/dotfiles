@@ -1,21 +1,25 @@
 #!/bin/sh
 
+CURRENT_DIR=$(pwd)
 cd $HOME
 
-echo "source $HOME/dotfiles/bash_profile" >> $HOME/.bash_profile
+echo "source $CURRENT_DIR/bash_profile" >> $HOME/.bash_profile
 
-echo "source $HOME/dotfiles/bashrc" >> $HOME/.bashrc
+echo "source $CURRENT_DIR/bashrc" >> $HOME/.bashrc
 
-ln -s $HOME/dotfiles/inputrc $HOME/.inputrc
+ln -s $CURRENT_DIR/inputrc $HOME/.inputrc
 
-echo "source-file $HOME/dotfiles/tmux.conf" >> $HOME/.tmux.conf
+echo "source-file $CURRENT_DIR/tmux.conf" >> $HOME/.tmux.conf
 
-ln -s $HOME/dotfiles/conkyrc $HOME/.conkyrc
+ln -s $CURRENT_DIR/conkyrc $HOME/.conkyrc
 
-echo "source $HOME/dotfiles/vimrc" >> $HOME/.vimrc
+echo "source $CURRENT_DIR/vimrc" >> $HOME/.vimrc
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-ln -s $HOME/dotfiles/plugins-vim $HOME/.vim/plugins-vim
+ln -s $CURRENT_DIR/plugins-vim $HOME/.vim/plugins-vim
+vim -u ~/.vimrc -T dumb -n -i NONE -es \
+    -c "silent! PluginInstall" \
+    -c "qall" || true
 
-ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
+ln -s $CURRENT_DIR/tmux.conf $HOME/.tmux.conf
 
-ln -s $HOME/dotfiles/dir_colors $HOME/.dircolors
+ln -s $CURRENT_DIR/dir_colors $HOME/.dircolors
