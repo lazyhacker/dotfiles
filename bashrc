@@ -31,11 +31,6 @@ elif [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     source /usr/local/etc/bash_completion.d/git-prompt.sh
 fi
 
-# Powerline
-#if [ -f /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
-#    source /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-#fi
-
 if [ -f "$HOME/.ssh/environment" ]; then 
     SSH_ENV="$HOME/.ssh/environment"
 
@@ -173,5 +168,5 @@ fi
 if [ $(uname) = 'Darwin' ]; then
     export LSCOLORS='fxFxcxdxbxegedabagacad'
     alias ls='ls -G'
-fi # Darwin
+fi
 
