@@ -22,15 +22,17 @@ fi
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
-
-[ -f /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
-[ -f /usr/local/etc/bash_completion.d/tmux ] && source /usr/local/etc/bash_completion.d/tmux
-    
-if [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
-    # Shows git prompt when in a git repository
+   
+# Check if the script exists, then source it
+if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+    source /usr/share/git-core/contrib/completion/git-prompt.sh
+elif [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     source /usr/local/etc/bash_completion.d/git-prompt.sh
-    PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
 fi
+
+# Set the prompt to use the git function
+# Format: __git_ps1 "PRE-GIT-TEXT" "POST-GIT-TEXT"
+PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
 
 # Powerline
 #if [ -f /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
@@ -68,6 +70,20 @@ if [ -f /usr/bin/ninja ]; then
     #export CMAKE_MAKE_PROGRAM=/usr/bin/ninja
 fi
 
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    bname=`basename "${PWD/$HOME/~}"`
+    echo -ne "\033]0;${bname}: ${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
+    ;;
+*)
+;;
+esac
+
+test -r "$HOME/.dircolors" && eval $(dircolors $HOME/.dircolors)
+alias ls='ls --color=auto'
+
+# Map common VIM commands to the command line.
 command_not_found_handle() {
     if [[ $1 == :* ]]; then
         # Remove the leading colon
@@ -91,6 +107,10 @@ command_not_found_handle() {
     fi
 }
 
+# --------------------------------------------------------
+# Customize the command prompt.
+# --------------------------------------------------------
+
 if command -v powerline-daemon > /dev/null 2>&1; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
@@ -103,6 +123,43 @@ if command -v powerline-daemon > /dev/null 2>&1; then
   fi
 fi
 
+# Set prompt styling.
+reset_style='\[\033[00m\]'
+#status_style=$reset_style'\[\033[0;90m\]' # gray color; use 0;37m for lighter color
+status_style=$reset_style'\[\033[0;29m\]' # gray color; use 0;37m for lighter color
+prompt_style=$reset_style
+command_style=$reset_style'\[\033[1;29m\]' # bold black
+
+# Call the Git prompt function to build the actual PS1
+# This will now include the Git branch AND your line
+export GIT_PS1_SHOWDIRTYSTATE=1 # Shows * for unstaged changes)
+export GIT_PS1_SHOWUNTRACKEDFILES=1 # Shows % for new files)
+export GIT_PS1_SHOWUPSTREAM="auto" # Shows if you are ahead/behind your origin)
+
+# Reset color for command output
+# (this one is invoked every time before a command is executed):
+trap 'echo -ne "\e[0m"' DEBUG
+
+# Create a custom prompt
+function prompt_command {
+    # #### Put a seperator between prompt commands. ####
+    # Fill with minuses (from: https://github.com/emilis/emilis-config/blob/master/.bash_ps1)
+    # (this is recalculated every time the prompt is shown in function prompt_command):
+    #
+    # Create a $fill of all screen width minus the time string and a space:
+    let fillsize=${COLUMNS}-9
+    fill=""
+    while [ "$fillsize" -gt "0" ]
+    do
+        fill="-${fill}" # fill with underscores to work on 
+        let fillsize=${fillsize}-1
+    done
+    
+    __git_ps1 "$status_style$fill \t\n$prompt_style\u@\h:\w" "$command_style\\\$ "
+}
+
+
+# Overrides for Darwin/MacOS
 if [ $(uname) = 'Darwin' ]; then
     export LSCOLORS='fxFxcxdxbxegedabagacad'
     alias ls='ls -G'
@@ -115,84 +172,16 @@ if [ $(uname) = 'Darwin' ]; then
     ###########################################
     # Fill with minuses
     # (this is recalculated every time the prompt is shown in function prompt_command):
-    fill="—- "
+    #fill="—- "
 
-    reset_style='\[\033[00m\]'
-    status_style=$reset_style'\[\033[0;90m\]' # gray color; use 0;37m for lighter color
-    prompt_style=$reset_style
-    command_style=$reset_style'\[\033[1;29m\]' # bold black
+    #reset_style='\[\033[00m\]'
+    #status_style=$reset_style'\[\033[0;90m\]' # gray color; use 0;37m for lighter color
+    #prompt_style=$reset_style
+    #command_style=$reset_style'\[\033[1;29m\]' # bold black
     
     # Prompt variable:
-    PS1="$status_style"'$fill \t\n'"$prompt_style"'${debian_chroot:+($debian_chroot)}\u@\h:\w\$'"$command_style "
+    #PS1="$status_style"'$fill \t\n'"$prompt_style"'${debian_chroot:+($debian_chroot)}\u@\h:\w\$'"$command_style "
 
-    # Reset color for command output
-    # (this one is invoked every time before a command is executed): trap 'echo -ne "\033[00m"' DEBUG
-
-    function prompt_command {
-
-        # create a $fill of all screen width minus the time string and a space:
-        let fillsize=${COLUMNS}-9
-        fill=""
-        while [ "$fillsize" -gt "0" ]
-        do
-        fill="-${fill}" # fill with underscores to work on
-        let fillsize=${fillsize}-1
-        done
-
-        # If this is an xterm set the title to user@host:dir
-        case "$TERM" in
-        xterm*|rxvt*)
-        bname=`basename "${PWD/$HOME/~}"`
-        echo -ne "\033]0;${bname}: ${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
-        ;;
-        *)
-        ;;
-        esac
-    }
-fi
-
-if [ $(uname) = "Linux" ]; then
-    # #### Put a seperator between prompt commands. ####
-    # Fill with minuses (from: https://github.com/emilis/emilis-config/blob/master/.bash_ps1)
-    # (this is recalculated every time the prompt is shown in function prompt_command):
-    fill="--- "
-    reset_style='\[\033[00m\]'
-    #status_style=$reset_style'\[\033[0;90m\]' # gray color; use 0;37m for lighter color
-    status_style=$reset_style'\[\033[0;29m\]' # gray color; use 0;37m for lighter color
-    prompt_style=$reset_style
-    command_style=$reset_style'\[\033[1;29m\]' # bold black
-    # Prompt variable:
-    PS1="$status_style"'$fill \t\n'"$prompt_style"'${debian_chroot:+($debian_chroot)}\u@\h:\w\$'"$command_style "
-    # Reset color for command output
-    # (this one is invoked every time before a command is executed):
-    trap 'echo -ne "\e[0m"' DEBUG
-    function prompt_command {
-
-        # create a $fill of all screen width minus the time string and a space:
-        let fillsize=${COLUMNS}-9
-        fill=""
-        while [ "$fillsize" -gt "0" ]
-        do
-            fill="-${fill}" # fill with underscores to work on 
-            let fillsize=${fillsize}-1
-        done
-
-        # If this is an xterm set the title to user@host:dir
-        case "$TERM" in
-        xterm*|rxvt*)
-            bname=`basename "${PWD/$HOME/~}"`
-            echo -ne "\033]0;${bname}: ${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
-            ;;
-        *)
-        ;;
-        esac
-    }
-    #PROMPT_COMMAND=prompt_command
-    # #### End Seperator ####
-
-    #export LS_COLORS="no=00:fi=00:di=36:ln=35;36:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:*.sh=01;32:*.csh=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.xbm=01;35:*.xpm=01;35:*.png=01;35:*.tif=01;35:"
-    test -r "$HOME/.dircolors" && eval $(dircolors $HOME/.dircolors)
-    alias ls='ls --color=auto'
-fi
+fi # Darwin
 
 PROMPT_COMMAND=prompt_command
