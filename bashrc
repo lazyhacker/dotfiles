@@ -6,6 +6,7 @@
 
 alias bd='popd >> /dev/null'
 alias cd='cd -P'
+alias ls='ls --color=auto'
 
 export HISTCONTROL=ignoredups:erasedups
 export HISTIGNORE="&:[]*:exit:ls"
@@ -29,10 +30,6 @@ if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
 elif [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     source /usr/local/etc/bash_completion.d/git-prompt.sh
 fi
-
-# Set the prompt to use the git function
-# Format: __git_ps1 "PRE-GIT-TEXT" "POST-GIT-TEXT"
-PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
 
 # Powerline
 #if [ -f /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
@@ -80,8 +77,10 @@ xterm*|rxvt*)
 ;;
 esac
 
-test -r "$HOME/.dircolors" && eval $(dircolors $HOME/.dircolors)
-alias ls='ls --color=auto'
+if command -v dircolors >/dev/null 2>&1; then
+    eval $(dircolors $HOME/.dircolors)
+
+fi
 
 # Map common VIM commands to the command line.
 command_not_found_handle() {
@@ -154,8 +153,15 @@ function prompt_command {
         fill="-${fill}" # fill with underscores to work on 
         let fillsize=${fillsize}-1
     done
-    
-    __git_ps1 "$status_style$fill \t\n$prompt_style\u@\h:\w" "$command_style\\\$ "
+
+    if type __git_ps1 &>/dev/null; then
+        # Use Git-aware prompt
+        __git_ps1 "$status_style$fill \t\n$prompt_style\u@\h:\w" "$command_style\\\$ "
+    else
+        # Fallback for Linux/macOS if git-prompt.sh is missing
+        echo -e "$status_style$fill \t"
+        PS1="$prompt_style\u@\h:\w$command_style\\\$ "
+    fi
 }
 
 
