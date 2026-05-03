@@ -158,36 +158,14 @@ function prompt_command {
         # Use Git-aware prompt
         __git_ps1 "$status_style$fill \t\n$prompt_style\u@\h:\w" "$command_style\\\$ "
     else
-        # Fallback for Linux/macOS if git-prompt.sh is missing
-        echo -e "$status_style$fill \t"
         PS1="$prompt_style\u@\h:\w$command_style\\\$ "
     fi
 }
-
 
 # Overrides for Darwin/MacOS
 if [ $(uname) = 'Darwin' ]; then
     export LSCOLORS='fxFxcxdxbxegedabagacad'
     alias ls='ls -G'
-    ############################################
-    # Modified from emilis bash prompt script
-    # from https://github.com/emilis/emilis-config/blob/master/.bash_ps1
-    #
-    # Modified for Mac OS X by
-    # @corndogcomputer
-    ###########################################
-    # Fill with minuses
-    # (this is recalculated every time the prompt is shown in function prompt_command):
-    #fill="—- "
-
-    #reset_style='\[\033[00m\]'
-    #status_style=$reset_style'\[\033[0;90m\]' # gray color; use 0;37m for lighter color
-    #prompt_style=$reset_style
-    #command_style=$reset_style'\[\033[1;29m\]' # bold black
-    
-    # Prompt variable:
-    #PS1="$status_style"'$fill \t\n'"$prompt_style"'${debian_chroot:+($debian_chroot)}\u@\h:\w\$'"$command_style "
-
 fi # Darwin
 
 PROMPT_COMMAND=prompt_command
