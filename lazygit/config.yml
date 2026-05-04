@@ -1,0 +1,7 @@
+gui:
+  theme:
+    optionsTextColor: ['#61afef', 'bold'] 
+    
+    selectedLineBgColor: ['reverse'] # Inverts colors for the active line
+    activeBorderColor: ['#98c379', 'bold']
+    inactiveBorderColor: ['#abb2bf']
