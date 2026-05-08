@@ -83,8 +83,7 @@
         },
         {
         "type": "python",
-        "style": "powerline",
-        "powerline_symbol": "",
+        "style": "plain",
         "foreground": "#ffd43b",
         "background": "#306998",
         "template": "  {{ .Full }} "
