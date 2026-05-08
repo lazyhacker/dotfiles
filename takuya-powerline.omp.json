@@ -12,6 +12,7 @@
           "background": "#0077c2",
           "foreground": "#ffffff",
           "template": " {{ .Name }} ",
+          "leading_diamond": "╭─",
           "trailing_diamond": "\ue0b0"
         },
         {
@@ -23,15 +24,12 @@
           "template": " \ue0c1 "
         },
         {
-          "type": "path",
+          "type": "go",
           "style": "powerline",
-          "powerline_symbol": "\ue0b0",
-          "background": "#444444",
-          "foreground": "#E4E4E4",
-          "properties": {
-            "style": "full"
-          },
-          "template": " {{ .Path }} "
+          "powerline_symbol": "",
+          "foreground": "#ffffff",
+          "background": "#7FD5EA",
+          "template": "  {{ .Full }} "
         },
         {
           "type": "git",
@@ -74,6 +72,14 @@
           "template": " node {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
         },
         {
+            "type": "python",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffd43b",
+            "background": "#306998",
+            "template": "  {{ .Full }} "
+        }, 
+        {
           "type": "time",
           "style": "diamond",
           "background": "#40c4ff",
@@ -95,6 +101,17 @@
           "template": "╰─"
         },
         {
+          "type": "path",
+          "style": "diamond",
+          "background": "#444444",
+          "foreground": "#E4E4E4",
+          "trailing_diamond": "\ue0b0",
+          "properties": {
+            "style": "full"
+          },
+          "template": " {{ .Path }} "
+        },
+        {
           "type": "status",
           "style": "plain",
           "foreground": "#e0f8ff",
@@ -104,7 +121,7 @@
           "properties": {
             "always_enabled": true
           },
-          "template": "$ "
+          "template": "  "
         }
       ]
     }

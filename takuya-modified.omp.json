@@ -23,6 +23,14 @@
           "type": "root"
         },
         {
+          "type": "go",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#ffffff",
+          "background": "#7FD5EA",
+          "template": "  {{ .Full }} "
+        },
+        {
           "background": "#444444",
           "foreground": "#E4E4E4",
           "powerline_symbol": "\ue0b0",
@@ -73,6 +81,14 @@
           "trailing_diamond": "\ue0b4",
           "type": "node"
         },
+        {
+        "type": "python",
+        "style": "powerline",
+        "powerline_symbol": "",
+        "foreground": "#ffd43b",
+        "background": "#306998",
+        "template": "  {{ .Full }} "
+        }, 
         {
           "background": "#40c4ff",
           "foreground": "#ffffff",
