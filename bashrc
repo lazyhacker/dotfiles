@@ -170,3 +170,8 @@ if [ $(uname) = 'Darwin' ]; then
     alias ls='ls -G'
 fi
 
+
+# If this is a ssh session then put it into a tmux session
+if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
+    tmux attach-session -t default || tmux new-session -s default
+fi
