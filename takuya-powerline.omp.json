@@ -29,7 +29,7 @@
             "foreground": "#ffffff",
             "background": "#33658A",
             "powerline_symbol": "",
-            "template": "{{ if .SSHSession }} {{ end }}"
+            "template": "{{ if .SSHSession }} .HostName{{ end }}"
             },
         {
           "type": "go",
