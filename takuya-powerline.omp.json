@@ -102,14 +102,12 @@
         },
         {
           "type": "path",
-          "style": "diamond",
-          "background": "#444444",
+          "style": "plain",
           "foreground": "#E4E4E4",
-          "trailing_diamond": "\ue0b0",
           "properties": {
             "style": "full"
           },
-          "template": " {{ .Path }} "
+          "template": "<#5e81ac>[</>{{ .Path }}<#5e81ac>]</>" 
         },
         {
           "type": "status",
@@ -121,7 +119,7 @@
           "properties": {
             "always_enabled": true
           },
-          "template": "  "
+          "template": "$ "
         }
       ]
     }
