@@ -159,7 +159,7 @@ function prompt_command {
 
 # Use oh-my-posh as default if available
 if command -v oh-my-posh >/dev/null 2>&1; then
-    eval "$(oh-my-posh init bash --config ~/.oh-my-posh.omp.json)"
+    eval "$(oh-my-posh init bash --config ~/.oh-my-posh.omp.toml)"
 else
     PROMPT_COMMAND=prompt_command
 fi
@@ -174,6 +174,9 @@ fi
 # 1. Check if we are in an interactive shell
 # 2. Check if we are in an SSH session
 # 3. Check that we aren't ALREADY inside tmux
+# Note: if this breaks then use this to start an plain shell:
+#    ssh user@remote-host /bin/bash --norc
 if [[ $- == *i* && -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
     exec tmux new-session -A -s main
 fi
+

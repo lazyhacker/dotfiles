@@ -24,4 +24,6 @@ ln -s $CURRENT_DIR/tmux.conf $HOME/.tmux.conf
 
 ln -s $CURRENT_DIR/dir_colors $HOME/.dircolors
 
-ln -s $CURRENT_DIR/takuya-powerline.omp.json $HOME/.oh-my-posh.omp.json
+ln -s $CURRENT_DIR/takuya-powerline.omp.toml $HOME/.oh-my-posh.omp.toml
+#oh-my-posh config export --config $CURRENT_DIR/takuya-powerline.omp.json --format toml > $HOME/.oh-my-posh.omp.toml
+
