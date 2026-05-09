@@ -171,7 +171,9 @@ if [ $(uname) = 'Darwin' ]; then
 fi
 
 
-# If this is a ssh session then put it into a tmux session
-if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
-    tmux attach-session -t default || tmux new-session -s default
+# 1. Check if we are in an interactive shell
+# 2. Check if we are in an SSH session
+# 3. Check that we aren't ALREADY inside tmux
+if [[ $- == *i* && -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
+    exec tmux new-session -A -s main
 fi
