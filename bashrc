@@ -171,17 +171,37 @@ if [ $(uname) = 'Darwin' ]; then
 fi
 
 
-# 1. Check if we are in an interactive shell
-# 2. Check if we are in an SSH session
-# 3. Check that we aren't ALREADY inside tmux
-# Note: if this breaks then use this to start an plain shell:
-#    ssh user@remote-host /bin/bash --norc
-if [[ $- == *i* && -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
-    exec tmux new-session -A -s main
-fi
+## 1. Check if we are in an interactive shell
+## 2. Check if we are in an SSH session
+## 3. Check that we aren't ALREADY inside tmux
+## Note: if this breaks then use this to start an plain shell:
+##    ssh user@remote-host /bin/bash --norc
+#if [[ $- == *i* && -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
+#    exec tmux new-session -A -s main
+#fi
+
+# Add `launch_tmux` at the very end of the .bashrc for hosts
+# that should always be access through tmux (e.g. remote hosts).
+launch_tmux() {
+    # 1. Check if we are in an interactive shell
+    # 2. Check if we are in an SSH session
+    # 3. Check that we aren't ALREADY inside tmux
+    if [[ $- == *i* && -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
+        exec tmux new-session -A -s main
+    fi
+}
 
 # If using the kitty terminal then we will alias the ssh with the kitten
 # wrapper.
 if [[ "$TERM" == "xterm-kitty" ]] && command -v kitten >/dev/null 2>&1; then
     alias ssh="kitten ssh"
 fi
+
+# Helper function to add to PATH only if the directory exists 
+# and isn't already present, preventing duplicates.
+path_add() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="$1:$PATH"
+    fi
+}
+
