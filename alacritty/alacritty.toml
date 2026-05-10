@@ -1,0 +1,21 @@
+[general]
+import = ["./themes/solarized_dark.toml"]
+
+# --- Font Settings ---
+[font]
+size = 14.0
+
+[font.normal]
+family = "Terminus"
+style = "Regular"
+
+# --- Scrolling ---
+[scrolling]
+history = 10000
+multiplier = 3
+
+# --- Selection ---
+[selection]
+save_to_clipboard = true
+
+

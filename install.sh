@@ -27,3 +27,4 @@ ln -s $CURRENT_DIR/dir_colors $HOME/.dircolors
 ln -s $CURRENT_DIR/takuya-powerline.omp.toml $HOME/.oh-my-posh.omp.toml
 #oh-my-posh config export --config $CURRENT_DIR/takuya-powerline.omp.json --format toml > $HOME/.oh-my-posh.omp.toml
 
+echo "import = [\"$CURRENT_DIR/alacritty.toml\"]" | cat - ~/.config/alacritty/alacritty.toml > temp.toml && mv temp.toml ~/.config/alacritty/alacritty.toml
