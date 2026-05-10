@@ -85,7 +85,7 @@ command_not_found_handle() {
 
         # Map specific vim commands to tmux commands
         case "$cmd" in
-            q)  tmux detach-session ;;
+            q)  tmux detach ;;
             qa) tmux kill-session ;;
             vs) tmux split-window -h ;;
             sp) tmux split-window -v ;;
