@@ -17,6 +17,7 @@ version = 4
     background = '#0077c2'
     type = 'shell'
     style = 'diamond'
+    trailing_diamond = ''
 
   [[blocks.segments]]
     template = '<parentBackground></>  '
@@ -36,16 +37,16 @@ version = 4
     type = 'go'
     style = 'powerline'
 
-  [[blocks.segments]]
-    template = ' {{ .Path }} '
-    foreground = '#E4E4E4'
-    powerline_symbol = ''
-    background = '#444444'
-    type = 'path'
-    style = 'powerline'
-
-    [blocks.segments.options]
-      style = 'full'
+#  [[blocks.segments]]
+#    template = ' {{ .Path }} '
+#    foreground = '#E4E4E4'
+#    powerline_symbol = ''
+#    background = '#444444'
+#    type = 'path'
+#    style = 'powerline'
+#
+#    [blocks.segments.options]
+#      style = 'full'
 
   [[blocks.segments]]
     template = ' {{ .HEAD }} {{ if .Working.Changed }}{{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<#ef5350>  {{ .Staging.String }}</>{{ end }} '
@@ -109,7 +110,17 @@ version = 4
     style = 'plain'
 
   [[blocks.segments]]
-    template = '❯ '
+    template = '<#5e81ac>[</>{{ .Path }}<#5e81ac>]</>'
+    foreground = '#E4E4E4'
+    type = 'path'
+    style = 'plain'
+
+    [blocks.segments.options]
+      style = 'full'
+
+
+  [[blocks.segments]]
+    template = ' $ '
     foreground = '#e0f8ff'
     type = 'status'
     style = 'plain'

@@ -5,6 +5,8 @@ import = ["./themes/solarized_dark.toml"]
 bindings = [
   { key = "N", mods = "Control", command = { program = "/usr/bin/alacritty", args = ["msg", "create-window"] } }
 ]
+[window]
+dimensions = { columns = 80, lines = 24 }
 
 [[mouse.bindings]]
 mouse = "Right"
