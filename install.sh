@@ -37,9 +37,11 @@ ln -s $CURRENT_DIR/takuya-powerline.omp.toml $HOME/.oh-my-posh.omp.toml
 # Configure Alacritty terminal
 echo "import = [\"$CURRENT_DIR/alacritty.toml\"]" | cat - $HOME/.config/alacritty/alacritty.toml > temp.toml && mv temp.toml ~/.config/alacritty/alacritty.toml
 
-# Set up fallback fonts for symbols in Terminus.
+# On Linux, et up fallback fonts for symbols in Terminus.
 # This assumes that the font being used is Terminus and the fallback is
 # Cascadia Mono nerd font.
-mkdir -p $HOME/.config/fontconfig/conf.d
-ln -s $CURRENT_DIR/fontconfig/conf.d/99-terminus-fallback.conf $HOME/.config/fontconfig/conf.d
-fc-cache -fv
+if [[ "$(uname)" == "Linux" ]]; then
+    mkdir -p $HOME/.config/fontconfig/conf.d
+    ln -s $CURRENT_DIR/fontconfig/conf.d/99-terminus-fallback.conf $HOME/.config/fontconfig/conf.d
+    fc-cache -fv
+fi
