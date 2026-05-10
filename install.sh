@@ -51,7 +51,31 @@ fi
 
 link_if_missing "$CURRENT_DIR/inputrc" "$HOME/.inputrc"
 link_if_missing "$CURRENT_DIR/dir_colors" "$HOME/.dircolors"
-link_if_missing "$CURRENT_DIR/takuya-powerline.omp.toml" "$HOME/.oh-my-posh.omp.toml"
+#link_if_missing "$CURRENT_DIR/takuya-powerline.omp.toml" "$HOME/.oh-my-posh.omp.toml"
+# Detect if Terminess font family is installed
+HAS_TERMINESS=false
+
+if command -v fc-list >/dev/null 2>&1; then
+    # Standard check for Linux (and macOS with fontconfig installed)
+    if fc-list :family | grep -iq "Terminess"; then
+        HAS_TERMINESS=true
+    fi
+elif [ "$(uname)" = "Darwin" ]; then
+    # Native macOS check using system_profiler if fc-list is missing
+    if system_profiler SPFontsDataType | grep -iq "Terminess"; then
+        HAS_TERMINESS=true
+    fi
+fi
+
+# oh-my-posh config export --config ~/.myconfig.omp.json --format toml --output ~/.myconfig.omp.toml
+# Link the appropriate Oh My Posh theme
+if [ "$HAS_TERMINESS" = true ]; then
+    echo "Terminess font detected. Using modified theme."
+    link_if_missing "$CURRENT_DIR/takuya-modified.omp.toml" "$HOME/.oh-my-posh.omp.toml"
+else
+    echo "Terminess font not found. Using standard powerline theme."
+    link_if_missing "$CURRENT_DIR/takuya-powerline.omp.toml" "$HOME/.oh-my-posh.omp.toml"
+fi
 
 # Alacritty logic
 ALACRITTY_CONFIG_DIR=$HOME/.config/alacritty
