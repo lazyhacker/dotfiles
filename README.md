@@ -4,24 +4,13 @@ Install
 -------
 
 ```
-$ git clone https://github.com/lazyhacker/dotfiles
+$ git clone https://github.com/lazyhacker/dotfiles.git
+$ cd dotfiles; ./install.sh
 ```
 
 VIM
 ---
 
-
-In `~/.vimrc` (Linux/OSX) or `~/_vimrc` (Windows), add to the beginning:
-
-```vim
-source dotfiles/vimrc
-```
-
-Install VUNDLE:
-
-```
-$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
 To disable certain plugins locally:
 
 ```vim
@@ -77,39 +66,4 @@ For login-shells (including Terminal.app) the order is:
      ~/.bash_profile
      ~/.bash_login
      ~/.profile
-```
-
-## Install
-
-Add to the start of ~/.bashrc
-
-```bash
-source dotfiles/bashrc
-```
-
-Symlink bash_profile to .bash_profile:
-
-```bash
-$ ln -s dotfiles/bashrc ~/.bashrc
-```
-
-TMUX
-----
-
-```
-$ ln -s dotfiles/tmux.conf ~/.tmux.conf
-```
-
-Conky
------
-
-```
-$ ln -s dotfiles/conkyrc ~/.conkrc
-```
-
-Xmodmap
--------
-
-```
-$ ln -s dotfiles/Xmodmap ~/.Xmodmap
 ```
