@@ -180,3 +180,8 @@ if [[ $- == *i* && -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
     exec tmux new-session -A -s main
 fi
 
+# If using the kitty terminal then we will alias the ssh with the kitten
+# wrapper.
+if [[ "$TERM" == "xterm-kitty" ]] && command -v kitten >/dev/null 2>&1; then
+    alias ssh="kitten ssh"
+fi

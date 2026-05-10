@@ -24,3 +24,13 @@ $if mode=vi
     "\C-a": beginning-of-line
     "\C-e": end-of-line
 $endif
+
+# Show ls --color for tab completion as well.
+set colored-stats on
+set colored-completion-prefix on
+
+# Fix Case-Insensitive completion
+set completion-ignore-case on
+
+# If there are multiple matches, show them immediately
+set show-all-if-ambiguous on
