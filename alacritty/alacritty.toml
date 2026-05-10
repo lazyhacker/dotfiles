@@ -1,6 +1,15 @@
 [general]
 import = ["./themes/solarized_dark.toml"]
 
+[keyboard]
+bindings = [
+  { key = "N", mods = "Control", command = { program = "/usr/bin/alacritty", args = ["msg", "create-window"] } }
+]
+
+[[mouse.bindings]]
+mouse = "Right"
+action = "Paste"
+
 # --- Font Settings ---
 [font]
 size = 14.0
