@@ -145,8 +145,12 @@ set signcolumn=yes
 set tags=tags;/
 
 " Go back to the position the cursor was on the last time this file was edited
+" Added check to skip this for gitcommit files
 if has("autocmd")
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal `\"")|endif
+    au BufReadPost *
+      \ if &ft !~# 'commit' && line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
 endif
 
 " Change to directory current working file
