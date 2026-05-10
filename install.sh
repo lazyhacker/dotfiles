@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CURRENT_DIR=$(pwd)
+CURRENT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 cd $HOME
 
 # Helper function: Append line if it doesn't exist

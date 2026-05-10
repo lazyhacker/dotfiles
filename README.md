@@ -5,7 +5,7 @@ Install
 
 ```
 $ git clone https://github.com/lazyhacker/dotfiles.git
-$ cd dotfiles; ./install.sh
+$ dotfiles/install.sh
 ```
 
 VIM
