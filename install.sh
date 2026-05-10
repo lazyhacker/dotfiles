@@ -50,10 +50,10 @@ ln -s $CURRENT_DIR/takuya-powerline.omp.toml $HOME/.oh-my-posh.omp.toml
 
 # Configure Alacritty terminal
 ALACRITTY_CONFIG_DIR=$HOME/.config/alacritty
-ALACRITTY_CONFIG= $ALACRITTY_CONFIG_DIR/alacritty.toml
-mkdir -p ALACRITTY_CONFIG_DIR
+ALACRITTY_CONFIG=$ALACRITTY_CONFIG_DIR/alacritty.toml
+mkdir -p $ALACRITTY_CONFIG_DIR
 touch $ALACRITTY_CONFIG
-printf "[general]\nimport = [\"$CURRENT_DIR/alacritty/alacritty.toml\"]\n\n" | cat - $ALACRITTY_CONFIG > temp.toml && mv temp.toml $ALACRITY_CONFIG
+printf "[general]\nimport = [\"$CURRENT_DIR/alacritty/alacritty.toml\"]\n\n" | cat - $ALACRITTY_CONFIG > temp.toml && mv temp.toml $ALACRITTY_CONFIG
 
 # On Linux, et up fallback fonts for symbols in Terminus.
 # This assumes that the font being used is Terminus and the fallback is
