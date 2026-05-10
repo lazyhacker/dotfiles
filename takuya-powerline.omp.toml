@@ -27,13 +27,13 @@ version = 4
     type = 'root'
     style = 'powerline'
 
-#  [[blocks.segments]]
-#    template = '{{ if .SSHSession }} {{ .HostName }}{{ end }}'
-#    foreground = '#ffffff'
-#    powerline_symbol = ''
-#    background = '#33658A'
-#    type = 'session'
-#    style = 'powerline'
+  [[blocks.segments]]
+    template = '{{ if .SSHSession }} {{ .HostName }}{{ end }}'
+    foreground = '#ffffff'
+    powerline_symbol = ''
+    background = '#33658A'
+    type = 'session'
+    style = 'powerline'
 
   [[blocks.segments]]
     template = '  {{ .Full }} '
