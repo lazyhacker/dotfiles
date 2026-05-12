@@ -34,3 +34,4 @@ set completion-ignore-case on
 
 # If there are multiple matches, show them immediately
 set show-all-if-ambiguous on
+set show-all-if-unmodified off
