@@ -3,8 +3,11 @@ import = ["./themes/solarized_dark.toml"]
 
 [keyboard]
 bindings = [
-  { key = "N", mods = "Control", command = { program = "/usr/bin/alacritty", args = ["msg", "create-window"] } }
+  { key = "N", mods = "Control", command = { program = "/usr/bin/alacritty", args = ["msg", "create-window"] } },
+  { key = "Q", mods = "Control", action = "ClearLogNotice" },
+  { key = "W", mods = "Command", action = "None" }
 ]
+
 [window]
 dimensions = { columns = 80, lines = 24 }
 
