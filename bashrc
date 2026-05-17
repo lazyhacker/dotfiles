@@ -134,29 +134,35 @@ export GIT_PS1_SHOWUPSTREAM="auto" # Shows if you are ahead/behind your origin)
 # (this one is invoked every time before a command is executed):
 trap 'echo -ne "\e[0m"' DEBUG
 
-# Create a custom prompt
 function prompt_command {
-    # #### Put a seperator between prompt commands. ####
-    # Fill with minuses (from: https://github.com/emilis/emilis-config/blob/master/.bash_ps1)
-    # (this is recalculated every time the prompt is shown in function prompt_command):
-    #
-    # Create a $fill of all screen width minus the time string and a space:
-    let fillsize=${COLUMNS}-9
-    fill=""
-    while [ "$fillsize" -gt "0" ]
-    do
-        fill="-${fill}" # fill with underscores to work on 
-        let fillsize=${fillsize}-1
-    done
+    # Line 1: --------------------------------------------------- 11:55:25
+    # Line 2: [podman] user@host:~/directory $
+    # Scope variables locally
+    local fillsize=$(( COLUMNS - 9 ))
+    local fill=""
+    local container_prefix=""
+
+    # Check if running inside a Podman container
+    if [[ -f /run/.containerenv ]]; then
+        container_prefix="[podman] "
+    fi
+
+    # generate the separator line
+    if (( fillsize > 0 )); then
+        printf -v fill "%${fillsize}s" ""   # Create a string of spaces
+        fill="${fill// /-}"                 # Replace all spaces with hyphens
+    fi
 
     if type __git_ps1 &>/dev/null; then
-        # Use Git-aware prompt
-        __git_ps1 "$status_style$fill \t\n$prompt_style\u@\h:\w" "$command_style\\\$ "
+        # Git-aware prompt
+        __git_ps1 "${status_style}${fill} \t\n${prompt_style}${container_prefix}\u@\h:\w" "${command_style}\\$ "
     else
-        PS1="$prompt_style\u@\h:\w$command_style\\\$ "
+        # Fallback prompt
+        PS1="${status_style}${fill} \t\n${prompt_style}${container_prefix}\u@\h:\w${command_style}\\$ "
     fi
 }
 
+PROMPT_COMMAND=prompt_command
 # Use oh-my-posh as default if available
 if command -v oh-my-posh >/dev/null 2>&1; then
     eval "$(oh-my-posh init bash --config ~/.oh-my-posh.omp.toml)"
