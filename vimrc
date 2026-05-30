@@ -592,6 +592,11 @@ let g:AutoPairsShortcutFastWrap = '<C-e>'
 
 
 " -----------  Vim Wiki -------------
+" No auto-wrapping at column 80
+autocmd FileType vimwiki setlocal textwidth=0
+
+" Auto-save VimWiki files when leaving insert mode or changing buffers
+autocmd FileType vimwiki autocmd InsertLeave,TextChanged,BufLeave <buffer> silent! wall
 
 " Set location to Documents and have markdown as the default
 let g:vimwiki_list = [{'path': '~/Documents/notes',
