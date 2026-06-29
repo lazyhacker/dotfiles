@@ -12,7 +12,7 @@ version = 4
 
   [[blocks.segments]]
     leading_diamond = '╭─'
-    template = ' {{ .Name }} '
+    template = '{{ if .Env.TMUX }} tmux {{ else }} {{ .Name }} {{ end }}'
     foreground = '#ffffff'
     background = '#0077c2'
     type = 'shell'
@@ -28,6 +28,14 @@ version = 4
 
     [blocks.segments.options]
       root_icon = ''
+
+  [[blocks.segments]]
+    template = '{{ if and .SSHSession (not .Env.TMUX) }}  {{ .UserName }}@{{ .HostName }} {{ end }}'
+    foreground = '#ffffff'
+    powerline_symbol = ''
+    background = '#33658A'
+    type = 'session'
+    style = 'powerline'
 
   [[blocks.segments]]
     template = '  {{ .Full }} '
