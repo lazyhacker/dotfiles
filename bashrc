@@ -140,12 +140,12 @@ function prompt_command {
     # Scope variables locally
     local fillsize=$(( COLUMNS - 9 ))
     local fill=""
-    local container_prefix=""
 
-    # Check if running inside a Podman container
-    if [[ -f /run/.containerenv ]]; then
-        container_prefix="[podman] "
-    fi
+    ## Check if running inside a Podman container
+    # local container_prefix=""
+    #if [[ -f /run/.containerenv ]]; then
+    #    container_prefix="[podman] "
+    #fi
 
     # generate the separator line
     if (( fillsize > 0 )); then
@@ -155,10 +155,10 @@ function prompt_command {
 
     if type __git_ps1 &>/dev/null; then
         # Git-aware prompt
-        __git_ps1 "${status_style}${fill} \t\n${prompt_style}${container_prefix}\u@\h:\w" "${command_style}\\$ "
+        __git_ps1 "${status_style}${fill} \t\n${prompt_style}\w" "${command_style}\\$ "
     else
         # Fallback prompt
-        PS1="${status_style}${fill} \t\n${prompt_style}${container_prefix}\u@\h:\w${command_style}\\$ "
+        PS1="${status_style}${fill} \t\n${prompt_style}\w${command_style}\\$ "
     fi
 }
 
